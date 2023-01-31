@@ -44,7 +44,7 @@ function AboutProject(sbutton) {
         a.style.color = '#330033';
         a.style.backgroundColor = 'white';
         b.style.color = 'white';
-        b.style.backgroundColor = '#330033'
+        b.style.backgroundColor = '#330033';
         if (sbutton.slice(0, 5) == 'about'){
             c = document.getElementById('about');
             d = document.getElementById('project');
@@ -84,6 +84,38 @@ for (let i = 0; i < contact.length; i++){
 let cancel_contact = document.getElementById('cancel_contact');
 cancel_contact.onclick = function(){
     Displayhamburger('contact-form'); 
+}
+
+let about = document.querySelectorAll('.abt');
+for (let i = 0; i < about.length; i++) {
+    about[i].onclick = function(){
+        let ele = document.getElementById('about');
+        let ele_2 = document.getElementById('project');
+        ele.style.display = 'block';
+        ele_2.style.display = 'none';
+        let b = document.getElementById('about-button');
+        let a = document.getElementById('project-button');  
+        b.style.color = '#330033';
+        b.style.backgroundColor = 'white';
+        a.style.color = 'white';
+        a.style.backgroundColor = '#330033';
+    }
+}
+
+let project = document.querySelectorAll('.proj');
+for (let i = 0; i < project.length; i++) {
+    project[i].onclick = function(){
+        let ele = document.getElementById('project');
+        let ele_2 = document.getElementById('about');
+        ele.style.display = 'block';
+        ele_2.style.display = 'none';
+        let a = document.getElementById('about-button');
+        let b = document.getElementById('project-button');  
+        b.style.color = '#330033';
+        b.style.backgroundColor = 'white';
+        a.style.color = 'white';
+        a.style.backgroundColor = '#330033';
+    }
 }
 
 // font-family: 'Anton', sans-serif;

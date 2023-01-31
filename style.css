@@ -105,7 +105,6 @@ button.hambuger {
   font-size: 22px;
 }
 .toggle-contact {
-  border-radius: 5px;
   margin-top: 13px;
   width: 90%;
   margin-left: auto;
@@ -160,7 +159,6 @@ button.hambuger {
 }
 .contact-button button {
   border: 1px solid #dd6b19;
-  border-radius: 5px;
   margin-top: 34px;
   position: relative;
   left: 88%;
@@ -212,7 +210,6 @@ button.hambuger {
   color: #121212;
   font-family: "Outfit", sans-serif;
   font-weight: bolder;
-  font-style: oblique;
   margin-bottom: 12px;
 }
 .about-para {
@@ -240,8 +237,8 @@ button.hambuger {
 .btn-yellow {
   color: #fff;
   background-color: #dd6b19;
+  border-radius: 5px;
   border: 1px solid #dd6b19;
-  border-radius: 15px;
   font-family: "Outfit", sans-serif;
 }
 
@@ -397,7 +394,7 @@ button.hambuger {
   .p-pro {
     width: 100%;
     position: relative;
-    bottom: 12px;
+    bottom: 9px;
     font-size: 12px;
     margin-bottom: 0px;
   }
@@ -410,7 +407,7 @@ button.hambuger {
   }
   .p-pro ~ a {
     position: relative;
-    bottom: 10px;
+    bottom: 8px;
   }
   .p-img img {
     display: inline-block;

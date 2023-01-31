@@ -17,6 +17,31 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
     integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
+  <!-- Email Json -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script type="text/javascript">
+      (function() {
+          // https://dashboard.emailjs.com/admin/account
+          emailjs.init('DPA5IFc1n_Ma0ZDJD');
+      })();
+  </script>
+  <script type="text/javascript">
+      window.onload = function() {
+          document.getElementById('contact-form').addEventListener('submit', function(event) {
+              event.preventDefault();
+              // generate a five digit number for the contact_number variable
+              //this.contact_number.value = Math.random() * 100000 | 0;
+              // these IDs from the previous steps
+              emailjs.sendForm('contact_service', 'contact_form', this)
+                  .then(function() {
+                      console.log('SUCCESS!');
+                  }, function(error) {
+                      console.log('FAILED...', error);
+                  });
+          });
+      }
+  </script>
+
   <link rel="stylesheet" href="style.css" />
   <title>Oyebamiji Mustapha Oyetunde</title>
 </head>
@@ -33,17 +58,17 @@
       <div>
         <div class="visible-md visible-lg">
           <ul class="f-hambuger">
-            <li class="fh-first"><a href="#">About</a></li>
-            <li><a href="#">Projects</a></li>
+            <li class="fh-first"><a class="abt" href="#about">About</a></li>
+            <li><a class="proj" href="#project">Projects</a></li>
           </ul>
         </div>
         <div class="visible-md visible-lg">
           <ul class="s-hambuger">
-            <li><a href="#">Twitter</a></li>
+            <li><a href="https://twitter.com/musoye1" target="_blank">Twitter</a></li>
             <li><a href="#">|</a></li>
-            <li><a href="#">LinkedIn</a></li>
+            <li><a href="https://linkedin.com/in/musoye" target="_blank">LinkedIn</a></li>
             <li><a href="#">|</a></li>
-            <li><a href="#">Github</a></li>
+            <li><a href="https://github.com/musoye" target="_blank">Github</a></li>
           </ul>
         </div>
         <button id="toggle-btn" class="visible-xs toggle-btn">
@@ -62,11 +87,11 @@
 
     <div class="toggle-list">
       <ul class="l-toggle-list">
-        <li><a href="#">About</a></li>
-        <li><a href="#">Projects</a></li>
-        <li><a href="#">Twitter</a></li>
-        <li><a href="#">LinkedIn</a></li>
-        <li><a href="#">Twitter</a></li>
+        <li><a class="abt" href="#about" >About</a></li>
+        <li><a class="proj" href="#project" >Projects</a></li>
+        <li><a href="https://twitter.com/musoye1" target="_blank">Twitter</a></li>
+        <li><a href="https://linkedin.com/in/musoye" target="_blank">LinkedIn</a></li>
+        <li><a href="https://github.com/musoye" target="_blank">Github</a></li>
       </ul>
     </div>
 
@@ -81,7 +106,7 @@
 
     <div class="row hello-below">
       <img class="col-xs-6 img-hello-1"
-        src="https://media.licdn.com/dms/image/C4D03AQHf5w2wss5G-w/profile-displayphoto-shrink_200_200/0/1667903297734?e=1680134400&v=beta&t=Ouwvi9dIhSmgO9F2g0NyQPin1YqQV8RHFaoN0yj3vc8"
+        src="./property/musoye.jfif"
         alt="" />
       <img class="col-xs-6 img-hello-2" width src="/property/I am MUSOYE.png" alt="" />
     </div>
@@ -120,13 +145,13 @@
 
       <h3 class="about-head" style="margin-bottom: 22px;">Skills</h3>
 
-      <h4 class="about-head" style="margin-bottom: 14px;">Front-End development tools</h4>
-      <div class="frontend row">
+      <h4 class="about-head" style="margin-bottom: 15px;">Front-End development tools</h4>
+      <div class="frontend row" style="margin-bottom: 17px;">
         <div class="col-md-1 col-xs-3 p-skil-marg"><img src="property/html.png" alt="">
           <p class="p-skill text-center">HTML</p>
         </div>
         <div class="col-md-1 col-xs-3  p-skil-marg"><img src="property/css.png" alt="">
-          <p class="p-skill text-center">css</p>
+          <p class="p-skill text-center">CSS</p>
         </div>
         <div class="col-md-1 col-xs-3  p-skil-marg"><img src="property/js.png" alt="">
           <p class="p-skill text-center">JavaScript</p>
@@ -140,7 +165,7 @@
       </div>
 
       <h4 class="about-head" style="margin-bottom: 14px;">Backend development tools</h4>
-      <div class="frontend row">
+      <div class="frontend row" style="margin-bottom: 14px;">
         <div class="col-md-1 col-xs-3 p-skil-marg"><img src="property/django.png" alt="">
           <p class="p-skill text-center">Django</p>
         </div>
@@ -153,20 +178,21 @@
       </div>
 
       <h4 class="about-head" style="margin-bottom: 14px;">Database</h4>
-      <div class="frontend row">
+      <div class="frontend row" style="margin-bottom: 17px;">
         <div class="col-md-1 col-xs-3 p-skil-marg"><img src="property/mysql.png" alt="">
           <p class="p-skill text-center">MySQL</p>
         </div>
         <div class="col-md-1 col-xs-3  p-skil-marg"><img src="property/postgres.png" alt="">
-          <p class="p-skill text-center">PostgreSQL</p>
+          <p class="p-skill text-center" >PostgreSQL</p>
         </div>
+        <div class="col-xs-1 visible-xs"></div>
         <div class="col-md-1 col-xs-3  p-skil-marg"><img src="property/sqlorm.png" alt="">
           <p class="p-skill text-center">SQLAlchemy ORM</p>
         </div>
       </div>
 
       <h4 class="about-head" style="margin-bottom: 14px;">Others</h4>
-      <div class="frontend row">
+      <div class="frontend row" style="margin-bottom: 17px;">
         <div class="col-md-1 col-xs-2 p-skil-marg"><img src="./property/c.png" alt="">
           <p class="p-skill text-center">C programming</p>
         </div>
@@ -180,7 +206,7 @@
           <p class="p-skill text-center">Github</p>
         </div>
       </div>
-      <div class="btn-resume"><a class="btn btn-md btn-yellow" href="">View resume</a></div>
+      <div class="btn-resume"><a class="btn btn-md btn-yellow" href="#" onclick="window.open('./property/cvupload.pdf', '_blank')">View resume</a></div>
     </div>
 
     <!-- Projexts -->
@@ -192,7 +218,7 @@
           <h3 class="p-head">Front-End Dictionary</h3>
           <p class="p-pr">A front-end dictionary app for checking up the meaning of words.</p>
           <p class="p-pro">
-            Built with: HTML, CSS, Js(Jquery) and bootstrap.
+            Built with: HTML, CSS, JS(Jquery), and Bootstrap.
           </p>
           <a href="" style="color: #dd6b18; text-decoration: none;font-family: 'Outfit', sans-serif;">code link</a>
 
@@ -207,7 +233,7 @@
           <h3 class="p-head">The E-Millenial Store</h3>
           <p class="p-pr">Done as part of a final project @Ustacky.com for completion of fullstack course</p>
           <p class="p-pro">
-            Built with: HTML, CSS, Js.
+            Built with: HTML, CSS, JS.
           </p>
           <a href="" style="color: #dd6b18; text-decoration: none;">code link</a>
           <a class="p-link" href="">View project <span class="fa fa fa-arrow-right fa-angle-up"
@@ -221,7 +247,7 @@
           <h3 class="p-head">Clovar CMS</h3>
           <p class="p-pr">A content management site built during my Zuri Internship </p>
           <p class="p-pro">
-            Built with: HTML, CSS, Js, python/Django and sqlite3
+            Built with: HTML, CSS, JS, Python/Django and sqlite3
           </p>
           <a href="" style="color: #dd6b18; text-decoration: none;">code link</a>
           <a class="p-link" href="">View project <span class="fa fa fa-arrow-right fa-angle-up"
@@ -244,9 +270,9 @@
         href="tel:+2347025770113" target="_blank">Phone: +234-07025770113</a></p>
 
     <div class="foot-icon" style="color: white;">
-      <a href="" class="img"><img  src="./property/twitter.png" alt=""></a>
-      <a href="" class="img"><img  src="./property/link.png" alt=""></a>
-      <a href="" class="img"><img  src="./property/hashnode.png" alt=""></a>
+      <a href="https://twitter.com/musoye1" target="_blank" class="img"><img  src="./property/twitter.png" alt=""></a>
+      <a href="https://linkedin.com/in/musoye" target="_blank" class="img"><img  src="./property/link.png" alt=""></a>
+      <a href="https://musoye.hashnode.dev" target="_blank" class="img"><img  src="./property/hashnode.png" alt=""></a>
     </div>
 
     <div class="f-last  row">
@@ -264,7 +290,7 @@
     <div class="form"><h3 class="text-center">Get in touch</h3>
 
 
-      <form style="width: 90%;margin-left: auto;margin-right: auto;" action="">
+      <form style="width: 90%;margin-left: auto;margin-right: auto;" id="contact-form">
         <div class="form-group">
           <label for="name" >Name</label>
           <input type="text" class="form-control" name="name" id="name" placeholder="Enter your Name" required>
