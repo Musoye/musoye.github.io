@@ -20,26 +20,38 @@
   <!-- Email Json -->
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <script type="text/javascript">
-      (function() {
-          // https://dashboard.emailjs.com/admin/account
-          emailjs.init('DPA5IFc1n_Ma0ZDJD');
-      })();
+    (function () {
+      // https://dashboard.emailjs.com/admin/account
+      emailjs.init('DPA5IFc1n_Ma0ZDJD');
+    })();
   </script>
   <script type="text/javascript">
-      window.onload = function() {
-          document.getElementById('contact-form').addEventListener('submit', function(event) {
-              event.preventDefault();
-              // generate a five digit number for the contact_number variable
-              //this.contact_number.value = Math.random() * 100000 | 0;
-              // these IDs from the previous steps
-              emailjs.sendForm('contact_service', 'contact_form', this)
-                  .then(function() {
-                      console.log('SUCCESS!');
-                  }, function(error) {
-                      console.log('FAILED...', error);
-                  });
+    window.onload = function () {
+      document.getElementById('contact-form').addEventListener('submit', function (event) {
+        event.preventDefault();
+        const name = event.target.elements.name.value;
+        const email = event.target.elements.email.value;
+        const message = event.target.elements.message.value;
+        if (name === '' || email === '' || message ===''){
+          alert('Enter all fields');
+        }
+
+        console.log('I enter here');
+        emailjs.send('service_t16lflp', 'template_l6147p9', {
+          name: name,
+          email: email,
+          message: message
+        })
+          .then(function (response) {
+            alert('Email sent successfully');
+            location.reload();
+          }, function (error) {
+            alert('Failed to send email', error);
+            alert('The official is notified!');
+            location.reload();
           });
-      }
+      });
+    }
   </script>
 
   <link rel="stylesheet" href="style.css" />
@@ -87,8 +99,8 @@
 
     <div class="toggle-list">
       <ul class="l-toggle-list">
-        <li><a class="abt" href="#about" >About</a></li>
-        <li><a class="proj" href="#project" >Projects</a></li>
+        <li><a class="abt" href="#about">About</a></li>
+        <li><a class="proj" href="#project">Projects</a></li>
         <li><a href="https://twitter.com/musoye1" target="_blank">Twitter</a></li>
         <li><a href="https://linkedin.com/in/musoye" target="_blank">LinkedIn</a></li>
         <li><a href="https://github.com/musoye" target="_blank">Github</a></li>
@@ -105,9 +117,7 @@
     <div class="hello">&lt;Hello/&gt;</div>
 
     <div class="row hello-below">
-      <img class="col-xs-6 img-hello-1"
-        src="./property/musoye.jfif"
-        alt="" />
+      <img class="col-xs-6 img-hello-1" src="./property/musoye.jfif" alt="" />
       <img class="col-xs-6 img-hello-2" width src="/property/I am MUSOYE.png" alt="" />
     </div>
 
@@ -122,8 +132,8 @@
         style="color: #dd6b18;">simplicity</span> and <span style="color: #dd6b18;"">user experience</span>
     </div>
 
-    <div class=" contact-button"><button class="btn btn-md btn-yellow cont">Get in touch <span class="fa fa-envelope-open"
-            style="padding-left: 3px;color: white;"></span></button></div>
+    <div class=" contact-button"><button class="btn btn-md btn-yellow cont">Get in touch <span
+            class="fa fa-envelope-open" style="padding-left: 3px;color: white;"></span></button></div>
 
   </div>
 
@@ -183,7 +193,7 @@
           <p class="p-skill text-center">MySQL</p>
         </div>
         <div class="col-md-1 col-xs-3  p-skil-marg"><img src="property/postgres.png" alt="">
-          <p class="p-skill text-center" >PostgreSQL</p>
+          <p class="p-skill text-center">PostgreSQL</p>
         </div>
         <div class="col-xs-1 visible-xs"></div>
         <div class="col-md-1 col-xs-3  p-skil-marg"><img src="property/sqlorm.png" alt="">
@@ -206,7 +216,8 @@
           <p class="p-skill text-center">Github</p>
         </div>
       </div>
-      <div class="btn-resume"><a class="btn btn-md btn-yellow" href="#" onclick="window.open('./property/cvupload.pdf', '_blank')">View resume</a></div>
+      <div class="btn-resume"><a class="btn btn-md btn-yellow" href="#"
+          onclick="window.open('./property/cvupload.pdf', '_blank')">View resume</a></div>
     </div>
 
     <!-- Projexts -->
@@ -220,9 +231,9 @@
           <p class="p-pro">
             Built with: HTML, CSS, JS(Jquery), and Bootstrap.
           </p>
-          <a href="" style="color: #dd6b18; text-decoration: none;font-family: 'Outfit', sans-serif;">code link</a>
+          <a href="https://github.com/Musoye/musto" target="_blank" style="color: #dd6b18; text-decoration: none;font-family: 'Outfit', sans-serif;">code link</a>
 
-          <a class="p-link" href="">View project <span class="fa fa fa-arrow-right fa-angle-up"
+          <a class="p-link" href="https://dictmus.netlify.app/" target="_blank">View project <span class="fa fa fa-arrow-right fa-angle-up"
               style="color: #dd6b18;"></span></a>
         </div>
       </div>
@@ -235,8 +246,8 @@
           <p class="p-pro">
             Built with: HTML, CSS, JS.
           </p>
-          <a href="" style="color: #dd6b18; text-decoration: none;">code link</a>
-          <a class="p-link" href="">View project <span class="fa fa fa-arrow-right fa-angle-up"
+          <a href="https://github.com/Musoye/e-commerce" target="_blank" style="color: #dd6b18; text-decoration: none;">code link</a>
+          <a target="_blank" class="p-link" href="https://musta.netlify.app/">View project <span class="fa fa fa-arrow-right fa-angle-up"
               style="color: #dd6b18;"></span></a>
         </div>
       </div>
@@ -249,8 +260,8 @@
           <p class="p-pro">
             Built with: HTML, CSS, JS, Python/Django and sqlite3
           </p>
-          <a href="" style="color: #dd6b18; text-decoration: none;">code link</a>
-          <a class="p-link" href="">View project <span class="fa fa fa-arrow-right fa-angle-up"
+          <a href="#" onclick="alert('Private Project! Not allow to view the source code')" style="color: #dd6b18; text-decoration: none;">code link</a>
+          <a class="p-link" href="https://zuri-training.github.io/clovar-documentation/" target="_blank">View project <span class="fa fa fa-arrow-right fa-angle-up"
               style="color: #dd6b18;"></span></a>
         </div>
       </div>
@@ -270,38 +281,44 @@
         href="tel:+2347025770113" target="_blank">Phone: +234-07025770113</a></p>
 
     <div class="foot-icon" style="color: white;">
-      <a href="https://twitter.com/musoye1" target="_blank" class="img"><img  src="./property/twitter.png" alt=""></a>
-      <a href="https://linkedin.com/in/musoye" target="_blank" class="img"><img  src="./property/link.png" alt=""></a>
-      <a href="https://musoye.hashnode.dev" target="_blank" class="img"><img  src="./property/hashnode.png" alt=""></a>
+      <a href="https://twitter.com/musoye1" target="_blank" class="img"><img src="./property/twitter.png" alt=""></a>
+      <a href="https://linkedin.com/in/musoye" target="_blank" class="img"><img src="./property/link.png" alt=""></a>
+      <a href="https://musoye.hashnode.dev" target="_blank" class="img"><img src="./property/hashnode.png" alt=""></a>
     </div>
 
     <div class="f-last  row">
       <p class="col-md-10 c">&copy; Copyright 2021-2022, All Rights Reserved</p>
-      <p class="col-md-2 " style="padding-right: 3px;">Designed by Eno <a href=""><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-twitter" viewBox="0 0 16 16">
-        <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
-    </svg></a>
-    </p>
+      <p class="col-md-2 " style="padding-right: 3px;">Designed by Eno <a href=""><svg
+            xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-twitter"
+            viewBox="0 0 16 16">
+            <path
+              d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z" />
+          </svg></a>
+      </p>
     </div>
   </footer>
 
   <div class="bg-cover contact-form" id="contact-form">
-<button id="cancel_contact" style='margin-left: 86%;padding-top: 2px;'><img  src="./property/x.svg" alt=""></button>
-    
-    <div class="form"><h3 class="text-center">Get in touch</h3>
+    <button id="cancel_contact" style='margin-left: 86%;padding-top: 2px;'><img src="./property/x.svg" alt=""></button>
+
+    <div class="form">
+      <h3 class="text-center">Get in touch</h3>
 
 
       <form style="width: 90%;margin-left: auto;margin-right: auto;" id="contact-form">
         <div class="form-group">
-          <label for="name" >Name</label>
+          <label for="name">Name</label>
           <input type="text" class="form-control" name="name" id="name" placeholder="Enter your Name" required>
         </div>
         <div class="form-group">
           <label for="email">Email Address</label>
-          <input type="email" class="form-control" name="email" id="email" placeholder="Enter your Email Address" required>
+          <input type="email" class="form-control" name="email" id="email" placeholder="Enter your Email Address"
+            required>
         </div>
-        <div style='padding-bottom: 20px;'class="form-group">
+        <div style='padding-bottom: 20px;' class="form-group">
           <label for="message">Message</label>
-          <textarea name="message" class="form-control" id="message" cols="30" rows="7" placeholder="Enter your message" required></textarea>
+          <textarea name="message" class="form-control" id="message" cols="30" rows="7" placeholder="Enter your message"
+            required></textarea>
         </div>
         <button class="btn btn-md btn-block btn-yellow">Send message <span class="fa fa-envelope-open"
             style="padding-left: 3px;color: white;"></span></button>
