@@ -21,7 +21,7 @@ ul.f-hambuger {
   flex-direction: row;
   margin-top: 7px;
   position: absolute;
-  left: 15%;
+  left: 16%;
   top: 6px;
   list-style-type: none;
 }
@@ -38,7 +38,7 @@ ul.s-hambuger {
   flex-direction: row;
   list-style-type: none;
   position: absolute;
-  left: 55%;
+  left: 78%;
   top: 6px;
 }
 ul.s-hambuger li {
@@ -48,7 +48,7 @@ ul.s-hambuger li {
 .toggle-btn {
   position: absolute;
   top: 14px;
-  right: 3%;
+  right: 3.0%;
 }
 button.hambuger {
   background: none;
@@ -70,7 +70,7 @@ button.hambuger {
 .toggle-logo {
   display: inline-block;
   width: 80px;
-  height: 23px;
+  height: 60px;
   margin: 5px 3px;
   border-radius: 5px;
 }
@@ -147,7 +147,7 @@ button.hambuger {
   color: #fff;
   font-family: "Nunito", sans-serif;
   margin-top: 10px;
-  font-size: 20px;
+  font-size: 24px;
   margin-left: 47.8%;
 }
 .job-below {
@@ -253,7 +253,7 @@ button.hambuger {
   width: 90%;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 10px;
+  margin-bottom: 90px;
 }
 .p-head {
   font-family: "Outfit", sans-serif;
