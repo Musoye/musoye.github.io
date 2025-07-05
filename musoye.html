@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Anton&family=Nunito:ital,wght@0,200;0,300;1,200;1,300&family=Open+Sans:ital,wght@0,600;1,500&family=Outfit:wght@200;300&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+  <script src="https://code.jquery.com/jquery-3.6.1.slim.js"
+    integrity="sha256-tXm+sa1uzsbFnbXt8GJqsgi2Tw+m4BLGDof6eUPjbtk=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+  <!-- Email Json -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script type="text/javascript">
+    (function () {
+      // https://dashboard.emailjs.com/admin/account
+      emailjs.init('DPA5IFc1n_Ma0ZDJD');
+    })();
+  </script>
+  <script type="text/javascript">
+    window.onload = function () {
+      document.getElementById('contact-form').addEventListener('submit', function (event) {
+        event.preventDefault();
+        const name = event.target.elements.name.value;
+        const email = event.target.elements.email.value;
+        const message = event.target.elements.message.value;
+        if (name === '' || email === '' || message ===''){
+          alert('Enter all fields');
+        }
+
+        console.log('I enter here');
+        emailjs.send('service_t16lflp', 'template_l6147p9', {
+          name: name,
+          email: email,
+          message: message
+        })
+          .then(function (response) {
+            alert('Email sent successfully');
+            location.reload();
+          }, function (error) {
+            alert('Failed to send email', error);
+            alert('The official is notified!');
+            location.reload();
+          });
+      });
+    }
+  </script>
+
+  <link rel="stylesheet" href="style.css" />
+  <title>Oyebamiji Mustapha Oyetunde</title>
+</head>
+
+<body>
+  <!-- Nav bar -->
+  <nav class="navbar navbar-pink">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">
+          <img alt="Brand" class="head-brand" src="property/Maclogo.png" />
+        </a>
+      </div>
+      <div>
+        <div class="visible-md visible-lg">
+          <ul class="f-hambuger">
+            <li class="fh-first"><a class="abt" href="#about">About</a></li>
+            <li><a class="proj" href="#project">Projects</a></li>
+          </ul>
+        </div>
+        <div class="visible-md visible-lg">
+          <ul class="s-hambuger">
+            <li><a href="https://twitter.com/musoye1" target="_blank">Twitter</a></li>
+            <li><a href="#">|</a></li>
+            <li><a href="https://linkedin.com/in/musoye" target="_blank">LinkedIn</a></li>
+            <li><a href="#">|</a></li>
+            <li><a href="https://github.com/musoye" target="_blank">Github</a></li>
+          </ul>
+        </div>
+        <button id="toggle-btn" class="visible-xs toggle-btn">
+           <img style="background-color: black;color: beige;" src="./property/Icon.png" alt="">
+          <!-- <i class="fas fa-bars hambuger"></i> -->
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- What to display on pressing the toggle btn -->
+  <div style="display:none;" class="toggle-display" id="toggle">
+    <img class="toggle-logo" src="property/musbgremove.png" alt="" />
+    <button class="cancel-toggle" id="cancel-toggle">
+      <i class="fa fa-times"></i>
+    </button>
+
+    <div class="toggle-list">
+      <ul class="l-toggle-list">
+        <li><a class="abt" href="#about">About</a></li>
+        <li><a class="proj" href="#project">Projects</a></li>
+        <li><a href="https://twitter.com/musoye1" target="_blank">Twitter</a></li>
+        <li><a href="https://linkedin.com/in/musoye" target="_blank">LinkedIn</a></li>
+        <li><a href="https://github.com/musoye" target="_blank">Github</a></li>
+      </ul>
+    </div>
+
+    <button class="toggle-contact btn btn-block btn-md btn-yellow cont">
+      Get in touch
+      <span class="fa fa-envelope-open" style="padding-left: 3px;background-color: #DD6B19;"></span>
+    </button>
+  </div>
+
+  <div class="container-fluid header">
+    <div class="hello">&lt;Hello/&gt;</div>
+
+    <div class="row hello-below">
+      <img class="col-xs-6 img-hello-1" src="./property/musoye.jfif" alt="" />
+      <img class="col-xs-6 img-hello-2" width src="/property/I am MUSOYE.png" alt="" />
+    </div>
+
+    <div class="job">
+      Full stack developer
+      <span class="fas fa-circle" style="color: #dd6b18; padding-left: 4px; padding-right: 4px"></span>
+      Graphic designer
+    </div>
+
+    <div class="job-below">
+      I have a passion for creating intuitive and engaging websites and applications, with a focus on <span
+        style="color: #dd6b18;">simplicity</span> and <span style="color: #dd6b18;"">user experience</span>
+    </div>
+
+    <div class=" contact-button"><button class="btn btn-md btn-yellow cont">Get in touch <span
+            class="fa fa-envelope-open" style="padding-left: 3px;color: white;"></span></button></div>
+
+  </div>
+
+  <div class="abt-proj">
+    <div class="tog-btn">
+      <div>
+        <button class="toggle-button toggle-button-1" id="about-button">About</button>
+        <button class="toggle-button toggle-button-2" id="project-button">Project</button>
+      </div>
+    </div>
+
+    <!-- About and SKill -->
+    <div class="about container-fluid" id="about">
+      <h3 class="about-head">Who am I?</h3>
+      <p class="about-para">I am Oyebamiji Mustapha Oyetunde. A programmer and graphic designer. I’m a purpose-driven
+        individual who is quick to adapt to any learning environment, who is dedicated to improving the online world
+        through my work as a developer, with a mission to make a positive impact with every line of code I write.
+      </p>
+
+      <h3 class="about-head" style="margin-bottom: 25px;">Skills</h3>
+
+      <h4 class="about-head" style="margin-bottom: 24px;">Front-End development tools</h4>
+      <div class="frontend row" style="margin-bottom: 29px;">
+        <div class="col-md-1 col-xs-3 p-skil-marg"><img src="property/html.png" alt="">
+          <p class="p-skill text-center">HTML</p>
+        </div>
+        <div class="col-md-1 col-xs-3  p-skil-marg"><img src="property/css.png" alt="">
+          <p class="p-skill text-center">CSS</p>
+        </div>
+        <div class="col-md-1 col-xs-3  p-skil-marg"><img src="property/js.png" alt="">
+          <p class="p-skill text-center">JavaScript</p>
+        </div>
+        <div class="col-md-1 col-xs-3  p-skil-marg"><img src="property/react.png" alt="">
+          <p class="p-skill text-center">React</p>
+        </div>
+        <div class="col-md-1 col-xs-3  p-skil-marg"><img src="property/bootstrap.png" alt="">
+          <p class="p-skill text-center">Bootstrap</p>
+        </div>
+      </div>
+
+      <h4 class="about-head" style="margin-bottom: 24px;">Backend development tools</h4>
+      <div class="frontend row" style="margin-bottom: 29px;">
+        <div class="col-md-1 col-xs-3 p-skil-marg"><img src="property/django.png" alt="">
+          <p class="p-skill text-center">Django</p>
+        </div>
+        <div class="col-md-1 col-xs-3  p-skil-marg"><img src="property/flask.png" alt="">
+          <p class="p-skill text-center">Flask</p>
+        </div>
+        <div class="col-md-1 col-xs-3  p-skil-marg"><img src="property/python.png" alt="">
+          <p class="p-skill text-center">Python</p>
+        </div>
+      </div>
+
+      <h4 class="about-head" style="margin-bottom: 24px;">Database</h4>
+      <div class="frontend row" style="margin-bottom: 29px;">
+        <div class="col-md-1 col-xs-3 p-skil-marg"><img src="property/mysql.png" alt="">
+          <p class="p-skill text-center">MySQL</p>
+        </div>
+        <div class="col-md-1 col-xs-3  p-skil-marg"><img src="property/postgres.png" alt="">
+          <p class="p-skill text-center">PostgreSQL</p>
+        </div>
+        <div class="col-xs-1 visible-xs"></div>
+        <div class="col-md-1 col-xs-3  p-skil-marg"><img src="property/sqlorm.png" alt="">
+          <p class="p-skill text-center">SQLAlchemy ORM</p>
+        </div>
+      </div>
+
+      <h4 class="about-head" style="margin-bottom: 24px;">Others</h4>
+      <div class="frontend row" style="margin-bottom: 29px;">
+        <div class="col-md-1 col-xs-2 p-skil-marg"><img src="./property/c.png" alt="">
+          <p class="p-skill text-center">C programming</p>
+        </div>
+        <div class="col-xs-1 visible-xs"></div>
+        <div class="col-md-1 col-xs-2  p-skil-marg"><img src="property/linux.png" alt="">
+          <p class="p-skill text-center">Linux</p>
+        </div>
+        <div class="col-md-1 col-xs-2  p-skil-marg"><img src="property/git.png" alt="">
+          <p class="p-skill text-center">Git</p>
+        </div>
+        <div class="col-md-1 col-xs-2  p-skil-marg"><img src="property/github.png" alt="">
+          <p class="p-skill text-center">Github</p>
+        </div>
+      </div>
+      <div class="btn-resume"><a class="btn btn-md btn-yellow" href="#"
+          onclick="window.open('./property/cvupload.pdf', '_blank')">View resume</a></div>
+    </div>
+
+    <!-- Projexts -->
+    <div class="project container-fluid" id="project">
+
+      <div class="project-num row">
+        <div class="col-md-5 col-xs-5 p-img"><img src="./property/dict.png" alt=""></div>
+        <div class="col-md-7 col-xs-7" style="color: black;">
+          <h3 class="p-head">Front-End Dictionary</h3>
+          <p class="p-pr">A front-end dictionary app for checking up the meaning of words.</p>
+          <p class="p-pro">
+            Built with: HTML, CSS, JS(Jquery), and Bootstrap.
+          </p>
+          <a href="https://github.com/Musoye/musto" target="_blank" style="color: #dd6b18; text-decoration: none;font-family: 'Outfit', sans-serif;">code link</a>
+
+          <a class="p-link" href="https://dictmus.netlify.app/" target="_blank">View project <span class="fa fa fa-arrow-right fa-angle-up"
+              style="color: #dd6b18;"></span></a>
+        </div>
+      </div>
+
+      <div class="project-num row">
+        <div class="col-md-5 col-xs-5 p-img"><img src="./property/commerce.png" alt=""></div>
+        <div class="col-md-7 col-xs-7" style="color: black;">
+          <h3 class="p-head">The E-Millenial Store</h3>
+          <p class="p-pr">Done as part of a final project @Ustacky.com for completion of fullstack course</p>
+          <p class="p-pro">
+            Built with: HTML, CSS, JS.
+          </p>
+          <a href="https://github.com/Musoye/e-commerce" target="_blank" style="color: #dd6b18; text-decoration: none;">code link</a>
+          <a target="_blank" class="p-link" href="https://musta.netlify.app/">View project <span class="fa fa fa-arrow-right fa-angle-up"
+              style="color: #dd6b18;"></span></a>
+        </div>
+      </div>
+
+      <div class="project-num row">
+        <div class="col-md-5 col-xs-5 p-img"><img src="./property/Clovar.png" alt=""></div>
+        <div class="col-md-7 col-xs-7" style="color: black;">
+          <h3 class="p-head">Clovar CMS</h3>
+          <p class="p-pr">A content management site built during my Zuri Internship </p>
+          <p class="p-pro">
+            Built with: HTML, CSS, JS, Python/Django and sqlite3
+          </p>
+          <a href="#" onclick="alert('Private Project! Not allow to view the source code')" style="color: #dd6b18; text-decoration: none;">code link</a>
+          <a class="p-link" href="https://zuri-training.github.io/clovar-documentation/" target="_blank">View project <span class="fa fa fa-arrow-right fa-angle-up"
+              style="color: #dd6b18;"></span></a>
+        </div>
+      </div>
+
+    </div>
+
+
+
+  </div>
+
+  <!-- Footer Section -->
+  <footer class="container-fluid footer">
+    <img class='f-img' src="./property/Maclogo.png" alt="">
+    <p class="f-para-1">Let's get started on something great</p>
+    <p class="f-para">Contact</p>
+    <p class="f-para f-para-2"><a href="mailto:mmusoye@gmail.com" target="_blank">Email: mmusoye@gmail.com</a> <a
+        href="tel:+2347025770113" target="_blank">Phone: +234-07025770113</a></p>
+
+    <div class="foot-icon" style="color: white;">
+      <a href="https://twitter.com/musoye1" target="_blank" class="img"><img src="./property/twitter.png" alt=""></a>
+      <a href="https://linkedin.com/in/musoye" target="_blank" class="img"><img src="./property/link.png" alt=""></a>
+      <a href="https://musoye.hashnode.dev" target="_blank" class="img"><img src="./property/hashnode.png" alt=""></a>
+    </div>
+
+    <hr class="visible-md visible-lg visible-sm"/>
+
+    <div class="f-last  row">
+      <p class="col-md-10 c">&copy; Copyright 2021-2022, All Rights Reserved</p>
+      <p class="col-md-2 " style="padding-right: 3px;color: #fefefe"><a href="https://www.behance.net/enobongedidion" target="_blank" style="text-decoration: null;color: #fefefe;"><span style="display: inline-block;color: #303 !important;background-color: white;border-radius: 50%;padding: 5px;font-weight: 900;">Bě</span> Designed by <span style="text-decoration: underline;">Eno</span></a>   
+      </p>
+    </div>
+  </footer>
+
+
+  <!-- Contact form implementation -->
+
+  <div class="bg-cover contact-form" id="contact-form">
+    <button id="cancel_contact" style='margin-left: 91%;margin-top:5px;padding-top: 2px;border: 0px hidden white;background-color: transparent;'><img src="./property/x.svg" alt=""></button>
+
+    <div class="form">
+      <h3 class="text-center">Get in touch</h3>
+
+
+      <form style="width: 90%;margin-left: auto;margin-right: auto;" id="contact-form">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" class="form-control" name="name" id="name" placeholder="Enter your Name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" class="form-control" name="email" id="email" placeholder="Enter your Email Address"
+            required>
+        </div>
+        <div style='padding-bottom: 20px;' class="form-group">
+          <label for="message">Message</label>
+          <textarea name="message" class="form-control" id="message" cols="30" rows="7" placeholder="Enter your message"
+            required></textarea>
+        </div>
+        <button class="btn btn-md btn-block btn-yellow">Send message <span class="fa fa-envelope-open"
+            style="padding-left: 3px;color: white;"></span></button>
+
+        <p style='padding-bottom: 15px;'></p>
+      </form>
+    </div>
+
+  </div>
+
+  <script src=" ./script.js"></script>
+</body>
+
+</html>

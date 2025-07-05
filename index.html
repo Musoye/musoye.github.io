@@ -1,337 +1,1437 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Oyebamiji Mustapha Oyetunde - Musoye</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Nunito:ital,wght@0,200;0,300;0,400;0,600;1,200;1,300&family=Open+Sans:ital,wght@0,600;1,500&family=Outfit:wght@200;300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <meta property="og:title" content="Musoye's Portfolio" />
+    <meta
+      property="og:description"
+      content="A glimpse into Musoye’s web creations, design flair, and technical skills."
+    />
+    <meta property="og:image" content="https://musoye.me/musoye_logo.png" />
+    <meta property="og:url" content="https://musoye.me" />
+    <meta property="og:type" content="website" />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Anton&family=Nunito:ital,wght@0,200;0,300;1,200;1,300&family=Open+Sans:ital,wght@0,600;1,500&family=Outfit:wght@200;300&display=swap"
-    rel="stylesheet" />
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
-  <script src="https://code.jquery.com/jquery-3.6.1.slim.js"
-    integrity="sha256-tXm+sa1uzsbFnbXt8GJqsgi2Tw+m4BLGDof6eUPjbtk=" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <!-- 🐦 Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Musoye's Portfolio" />
+    <meta
+      name="twitter:description"
+      content="A glimpse into Musoye’s web creations, design flair, and technical skills."
+    />
+    <meta name="twitter:image" content="https://musoye.me/musoye_logo.png" />
 
-  <!-- Email Json -->
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-  <script type="text/javascript">
-    (function () {
-      // https://dashboard.emailjs.com/admin/account
-      emailjs.init('DPA5IFc1n_Ma0ZDJD');
-    })();
-  </script>
-  <script type="text/javascript">
-    window.onload = function () {
-      document.getElementById('contact-form').addEventListener('submit', function (event) {
-        event.preventDefault();
-        const name = event.target.elements.name.value;
-        const email = event.target.elements.email.value;
-        const message = event.target.elements.message.value;
-        if (name === '' || email === '' || message ===''){
-          alert('Enter all fields');
-        }
+    <link rel="icon" href="./musoye_logo.png" type="image/png" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
 
-        console.log('I enter here');
-        emailjs.send('service_t16lflp', 'template_l6147p9', {
-          name: name,
-          email: email,
-          message: message
-        })
+    <!-- EmailJS -->
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"
+    ></script>
+    <script type="text/javascript">
+      (function () {
+        // https://dashboard.emailjs.com/admin/account
+        emailjs.init("DPA5IFc1n_Ma0ZDJD");
+      })();
+    </script>
+    <script>
+      const contact = document.getElementById("contact-form");
+      const contact_modal = document.getElementById("contact-modal");
+      contact.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const message = document.getElementById("message").value;
+
+        // EmailJS template parameters
+        const templateParams = {
+          from_name: name,
+          from_email: email,
+          message: message,
+          to_name: "Musoye",
+        };
+
+        // Show loading state
+        const submitBtn = e.target.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML =
+          'Sending... <i class="fas fa-spinner fa-spin ml-2"></i>';
+        submitBtn.disabled = true;
+
+        // Send email using EmailJS
+        emailjs
+          .send("service_t16lflp", "template_l6147p9", templateParams)
           .then(function (response) {
-            alert('Email sent successfully');
-            location.reload();
-          }, function (error) {
-            alert('Failed to send email', error);
-            alert('The official is notified!');
-            location.reload();
+            console.log("SUCCESS!", response.status, response.text);
+            alert("Message sent successfully!");
+            contactForm.reset();
+          })
+          .catch(function (error) {
+            console.log("FAILED...", error);
+            alert(
+              "Failed to send message. Please try again or contact directly via email."
+            );
+          })
+          .finally(function () {
+            // Restore button state
+            setTimeout(() => {}, 3000);
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+            contact_modal.classList.add("opacity-0", "pointer-events-none");
+            document.body.style.overflow = "auto";
           });
       });
-    }
-  </script>
+    </script>
 
-  <link rel="stylesheet" href="style.css" />
-  <title>Oyebamiji Mustapha Oyetunde</title>
-</head>
+    <style>
+      .font-anton {
+        font-family: "Anton", sans-serif;
+      }
+      .font-nunito {
+        font-family: "Nunito", sans-serif;
+      }
+      .font-opensans {
+        font-family: "Open Sans", sans-serif;
+      }
+      .font-outfit {
+        font-family: "Outfit", sans-serif;
+      }
+      .bg-primary {
+        background-color: #330033;
+      }
+      .text-accent {
+        color: #dd6b18;
+      }
+      .bg-accent {
+        background-color: #dd6b18;
+      }
+      .bg-secondary {
+        background-color: #c49dc4;
+      }
 
-<body>
-  <!-- Nav bar -->
-  <nav class="navbar navbar-pink">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="#">
-          <img alt="Brand" class="head-brand" src="property/Maclogo.png" />
-        </a>
+      .hero-bg {
+        background: linear-gradient(135deg, #330033 0%, #4a0e4e 100%);
+      }
+
+      .card-hover {
+        transition: all 0.3s ease;
+      }
+
+      .card-hover:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      }
+
+      .skill-icon {
+        transition: transform 0.3s ease;
+      }
+
+      .skill-icon:hover {
+        transform: scale(1.1);
+      }
+
+      .gradient-text {
+        background: linear-gradient(135deg, #dd6b18, #c49dc4);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      /* Hide sections by default */
+      .section-hidden {
+        display: none;
+      }
+
+      /* Contact form overlay */
+      .contact-overlay {
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(5px);
+      }
+    </style>
+  </head>
+
+  <body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-primary shadow-lg fixed w-full top-0 z-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <div class="flex-shrink-0">
+            <span class="text-white font-outfit text-xl font-bold">MUSOYE</span>
+          </div>
+
+          <!-- Desktop Menu -->
+          <div class="hidden md:block">
+            <div class="ml-10 flex items-baseline space-x-8">
+              <a
+                class="nav-link text-gray-300 hover:text-white px-3 py-2 text-sm font-nunito transition-colors"
+                onclick="showAbout(event)"
+                >About</a
+              >
+              <a
+                class="nav-link text-gray-300 hover:text-white px-3 py-2 text-sm font-nunito transition-colors change"
+                onclick="showProjects(event)"
+                >Projects</a
+              >
+            </div>
+          </div>
+
+          <!-- Social Links -->
+          <div class="hidden md:flex items-center space-x-4">
+            <a
+              href="https://twitter.com/musoye1"
+              target="_blank"
+              class="text-gray-300 hover:text-white transition-colors"
+            >
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a
+              href="https://linkedin.com/in/musoye"
+              target="_blank"
+              class="text-gray-300 hover:text-white transition-colors"
+            >
+              <i class="fab fa-linkedin"></i>
+            </a>
+            <a
+              href="https://github.com/musoye"
+              target="_blank"
+              class="text-gray-300 hover:text-white transition-colors"
+            >
+              <i class="fab fa-github"></i>
+            </a>
+            <a
+            href="https://medium.com/@musoye1"
+            target="_blank"
+            class="text-gray-300 hover:text-white transition-colors"
+          >
+            <i class="fab fa-medium"></i>
+          </a>
+          </div>
+
+          <!-- Mobile menu button -->
+          <div class="md:hidden">
+            <button
+              id="mobile-menu-btn"
+              class="text-gray-300 hover:text-white focus:outline-none"
+            >
+              <i class="fas fa-bars text-xl"></i>
+            </button>
+          </div>
+        </div>
       </div>
-      <div>
-        <div class="visible-md visible-lg">
-          <ul class="f-hambuger">
-            <li class="fh-first"><a class="abt" href="#about">About</a></li>
-            <li><a class="proj" href="#project">Projects</a></li>
-          </ul>
+
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="md:hidden section-hidden bg-primary">
+        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+          <a
+            class="nav-link text-gray-300 hover:text-white block px-3 py-2 text-base font-nunito"
+            onclick="showAbout(event)"
+            >About</a
+          >
+          <a
+            class="nav-link text-gray-300 hover:text-white block px-3 py-2 text-base font-nunito change"
+            onclick="showProjects(event)"
+            >Projects</a
+          >
+          <div class="flex space-x-4 px-3 py-2">
+            <a
+              href="https://twitter.com/musoye1"
+              target="_blank"
+              class="text-gray-300 hover:text-white"
+            >
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a
+              href="https://linkedin.com/in/musoye"
+              target="_blank"
+              class="text-gray-300 hover:text-white"
+            >
+              <i class="fab fa-linkedin"></i>
+            </a>
+            <a
+              href="https://github.com/musoye"
+              target="_blank"
+              class="text-gray-300 hover:text-white"
+            >
+              <i class="fab fa-github"></i>
+            </a>
+            <a
+            href="https://medium.com/@musoye1"
+            target="_blank"
+            class="text-gray-300 hover:text-white"
+          >
+            <i class="fab fa-medium"></i>
+          </a>
+          </div>
         </div>
-        <div class="visible-md visible-lg">
-          <ul class="s-hambuger">
-            <li><a href="https://twitter.com/musoye1" target="_blank">Twitter</a></li>
-            <li><a href="#">|</a></li>
-            <li><a href="https://linkedin.com/in/musoye" target="_blank">LinkedIn</a></li>
-            <li><a href="#">|</a></li>
-            <li><a href="https://github.com/musoye" target="_blank">Github</a></li>
-          </ul>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section
+      class="hero-bg min-h-screen flex items-center justify-center pt-16"
+    >
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="mb-8">
+          <p
+            class="text-secondary font-opensans text-lg md:text-xl font-bold tracking-wider mb-4"
+          ></p>
         </div>
-        <button id="toggle-btn" class="visible-xs toggle-btn">
-           <img style="background-color: black;color: beige;" src="./property/Icon.png" alt="">
-          <!-- <i class="fas fa-bars hambuger"></i> -->
+
+        <div
+          class="flex flex-col md:flex-row items-center justify-center space-y-6 md:space-y-0 md:space-x-12 mt-4 mb-8"
+        >
+          <div class="relative">
+            <img
+              src="./images/musoye.jpg"
+              alt="Oyebamiji Mustapha"
+              class="w-48 h-48 md:w-56 md:h-56 rounded-full border-4 border-accent shadow-2xl transform -rotate-3 hover:rotate-0 transition-transform duration-300"
+            />
+          </div>
+          <div class="text-white">
+            <h1 class="text-4xl md:text-6xl font-outfit font-bold mb-4">
+              I am <span class="gradient-text">MUSOYE</span>
+            </h1>
+          </div>
+        </div>
+
+        <div class="text-white text-center mb-8">
+          <p class="text-xl md:text-2xl font-nunito mb-4">
+            Software Engineer
+            <span class="text-accent mx-2">•</span>
+            Machine Learning Engineer
+          </p>
+          <p
+            class="text-lg md:text-xl font-nunito max-w-3xl mx-auto leading-relaxed"
+          >
+            I have a passion for creating intuitive and engaging applications,
+            with a focus on
+            <span class="text-accent">simplicity</span> and
+            <span class="text-accent">user experience</span>. Currently
+            exploring ML/AI as a side venture while mastering full-stack
+            development.
+          </p>
+        </div>
+
+        <button
+          id="contact-btn"
+          class="bg-accent hover:bg-orange-600 text-white px-8 py-3 rounded-lg font-outfit font-medium transition-colors shadow-lg mb-4"
+        >
+          Get in touch <i class="fas fa-envelope ml-2"></i>
         </button>
       </div>
-    </div>
-  </nav>
+    </section>
 
-  <!-- What to display on pressing the toggle btn -->
-  <div style="display:none;" class="toggle-display" id="toggle">
-    <img class="toggle-logo" src="property/musbgremove.png" alt="" />
-    <button class="cancel-toggle" id="cancel-toggle">
-      <i class="fa fa-times"></i>
-    </button>
-
-    <div class="toggle-list">
-      <ul class="l-toggle-list">
-        <li><a class="abt" href="#about">About</a></li>
-        <li><a class="proj" href="#project">Projects</a></li>
-        <li><a href="https://twitter.com/musoye1" target="_blank">Twitter</a></li>
-        <li><a href="https://linkedin.com/in/musoye" target="_blank">LinkedIn</a></li>
-        <li><a href="https://github.com/musoye" target="_blank">Github</a></li>
-      </ul>
-    </div>
-
-    <button class="toggle-contact btn btn-block btn-md btn-yellow cont">
-      Get in touch
-      <span class="fa fa-envelope-open" style="padding-left: 3px;background-color: #DD6B19;"></span>
-    </button>
-  </div>
-
-  <div class="container-fluid header">
-    <div class="hello">&lt;Hello/&gt;</div>
-
-    <div class="row hello-below">
-      <img class="col-xs-6 img-hello-1" src="./property/musoye.jfif" alt="" />
-      <img class="col-xs-6 img-hello-2" width src="/property/I am MUSOYE.png" alt="" />
-    </div>
-
-    <div class="job">
-      Full stack developer
-      <span class="fas fa-circle" style="color: #dd6b18; padding-left: 4px; padding-right: 4px"></span>
-      Graphic designer
-    </div>
-
-    <div class="job-below">
-      I have a passion for creating intuitive and engaging websites and applications, with a focus on <span
-        style="color: #dd6b18;">simplicity</span> and <span style="color: #dd6b18;"">user experience</span>
-    </div>
-
-    <div class=" contact-button"><button class="btn btn-md btn-yellow cont">Get in touch <span
-            class="fa fa-envelope-open" style="padding-left: 3px;color: white;"></span></button></div>
-
-  </div>
-
-  <div class="abt-proj">
-    <div class="tog-btn">
-      <div>
-        <button class="toggle-button toggle-button-1" id="about-button">About</button>
-        <button class="toggle-button toggle-button-2" id="project-button">Project</button>
-      </div>
-    </div>
-
-    <!-- About and SKill -->
-    <div class="about container-fluid" id="about">
-      <h3 class="about-head">Who am I?</h3>
-      <p class="about-para">I am Oyebamiji Mustapha Oyetunde. A programmer and graphic designer. I’m a purpose-driven
-        individual who is quick to adapt to any learning environment, who is dedicated to improving the online world
-        through my work as a developer, with a mission to make a positive impact with every line of code I write.
-      </p>
-
-      <h3 class="about-head" style="margin-bottom: 25px;">Skills</h3>
-
-      <h4 class="about-head" style="margin-bottom: 24px;">Front-End development tools</h4>
-      <div class="frontend row" style="margin-bottom: 29px;">
-        <div class="col-md-1 col-xs-3 p-skil-marg"><img src="property/html.png" alt="">
-          <p class="p-skill text-center">HTML</p>
-        </div>
-        <div class="col-md-1 col-xs-3  p-skil-marg"><img src="property/css.png" alt="">
-          <p class="p-skill text-center">CSS</p>
-        </div>
-        <div class="col-md-1 col-xs-3  p-skil-marg"><img src="property/js.png" alt="">
-          <p class="p-skill text-center">JavaScript</p>
-        </div>
-        <div class="col-md-1 col-xs-3  p-skil-marg"><img src="property/react.png" alt="">
-          <p class="p-skill text-center">React</p>
-        </div>
-        <div class="col-md-1 col-xs-3  p-skil-marg"><img src="property/bootstrap.png" alt="">
-          <p class="p-skill text-center">Bootstrap</p>
+    <!-- Toggle Section -->
+    <section class="bg-gray-100 py-8">
+      <div class="max-w-4xl mx-auto px-4">
+        <div class="flex justify-center">
+          <div class="bg-white rounded-full p-1 shadow-lg">
+            <button
+              id="about-btn"
+              class="px-6 py-2 rounded-full bg-primary text-white font-outfit transition-all"
+            >
+              About
+            </button>
+            <button
+              id="projects-btn"
+              class="px-6 py-2 rounded-full text-primary font-outfit transition-all"
+            >
+              Projects
+            </button>
+          </div>
         </div>
       </div>
+    </section>
 
-      <h4 class="about-head" style="margin-bottom: 24px;">Backend development tools</h4>
-      <div class="frontend row" style="margin-bottom: 29px;">
-        <div class="col-md-1 col-xs-3 p-skil-marg"><img src="property/django.png" alt="">
-          <p class="p-skill text-center">Django</p>
-        </div>
-        <div class="col-md-1 col-xs-3  p-skil-marg"><img src="property/flask.png" alt="">
-          <p class="p-skill text-center">Flask</p>
-        </div>
-        <div class="col-md-1 col-xs-3  p-skil-marg"><img src="property/python.png" alt="">
-          <p class="p-skill text-center">Python</p>
-        </div>
-      </div>
-
-      <h4 class="about-head" style="margin-bottom: 24px;">Database</h4>
-      <div class="frontend row" style="margin-bottom: 29px;">
-        <div class="col-md-1 col-xs-3 p-skil-marg"><img src="property/mysql.png" alt="">
-          <p class="p-skill text-center">MySQL</p>
-        </div>
-        <div class="col-md-1 col-xs-3  p-skil-marg"><img src="property/postgres.png" alt="">
-          <p class="p-skill text-center">PostgreSQL</p>
-        </div>
-        <div class="col-xs-1 visible-xs"></div>
-        <div class="col-md-1 col-xs-3  p-skil-marg"><img src="property/sqlorm.png" alt="">
-          <p class="p-skill text-center">SQLAlchemy ORM</p>
-        </div>
-      </div>
-
-      <h4 class="about-head" style="margin-bottom: 24px;">Others</h4>
-      <div class="frontend row" style="margin-bottom: 29px;">
-        <div class="col-md-1 col-xs-2 p-skil-marg"><img src="./property/c.png" alt="">
-          <p class="p-skill text-center">C programming</p>
-        </div>
-        <div class="col-xs-1 visible-xs"></div>
-        <div class="col-md-1 col-xs-2  p-skil-marg"><img src="property/linux.png" alt="">
-          <p class="p-skill text-center">Linux</p>
-        </div>
-        <div class="col-md-1 col-xs-2  p-skil-marg"><img src="property/git.png" alt="">
-          <p class="p-skill text-center">Git</p>
-        </div>
-        <div class="col-md-1 col-xs-2  p-skil-marg"><img src="property/github.png" alt="">
-          <p class="p-skill text-center">Github</p>
-        </div>
-      </div>
-      <div class="btn-resume"><a class="btn btn-md btn-yellow" href="#"
-          onclick="window.open('./property/cvupload.pdf', '_blank')">View resume</a></div>
-    </div>
-
-    <!-- Projexts -->
-    <div class="project container-fluid" id="project">
-
-      <div class="project-num row">
-        <div class="col-md-5 col-xs-5 p-img"><img src="./property/dict.png" alt=""></div>
-        <div class="col-md-7 col-xs-7" style="color: black;">
-          <h3 class="p-head">Front-End Dictionary</h3>
-          <p class="p-pr">A front-end dictionary app for checking up the meaning of words.</p>
-          <p class="p-pro">
-            Built with: HTML, CSS, JS(Jquery), and Bootstrap.
+    <!-- About Section -->
+    <section id="about-section" class="bg-gray-50 py-16">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-12">
+          <h2 class="text-3xl font-outfit font-bold text-gray-900 mb-6">
+            Who am I?
+          </h2>
+          <p
+            class="text-lg font-nunito text-gray-700 leading-relaxed max-w-4xl"
+          >
+            I am Oyebamiji Mustapha Oyetunde, a Software Engineer and Machine
+            Learning enthusiast. I'm a purpose-driven individual who is quick to
+            adapt to any learning environment, dedicated to improving the
+            digital world through innovative solutions. Currently studying
+            Computer Engineering at Federal University of Technology, Akure, and
+            serving as Skill Development Lead at Google Developer Group on
+            Campus.
           </p>
-          <a href="https://github.com/Musoye/musto" target="_blank" style="color: #dd6b18; text-decoration: none;font-family: 'Outfit', sans-serif;">code link</a>
+        </div>
 
-          <a class="p-link" href="https://dictmus.netlify.app/" target="_blank">View project <span class="fa fa fa-arrow-right fa-angle-up"
-              style="color: #dd6b18;"></span></a>
+        <!-- Skills Section -->
+        <div class="mb-12">
+          <h3 class="text-2xl font-outfit font-bold text-gray-900 mb-8">
+            Skills & Technologies
+          </h3>
+
+          <!-- Backend Development -->
+          <div class="mb-10">
+            <h4 class="text-xl font-outfit font-semibold text-gray-800 mb-6">
+              Backend Development
+            </h4>
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+              <div
+                class="skill-icon text-center p-4 bg-white rounded-lg shadow-md card-hover"
+              >
+                <i class="fab fa-python text-4xl text-blue-500 mb-2"></i>
+                <p class="font-nunito text-sm font-medium">Python</p>
+              </div>
+              <div
+                class="skill-icon text-center p-4 bg-white rounded-lg shadow-md card-hover"
+              >
+                <i class="fab fa-node-js text-4xl text-green-500 mb-2"></i>
+                <p class="font-nunito text-sm font-medium">Node.js</p>
+              </div>
+              <div
+                class="skill-icon text-center p-4 bg-white rounded-lg shadow-md card-hover"
+              >
+                <i class="fab fa-js-square text-4xl text-yellow-500 mb-2"></i>
+                <p class="font-nunito text-sm font-medium">JavaScript</p>
+              </div>
+              <div
+                class="skill-icon text-center p-4 bg-white rounded-lg shadow-md card-hover"
+              >
+                <i class="fab fa-golang text-4xl text-blue-400 mb-2"></i>
+                <p class="font-nunito text-sm font-medium">Golang</p>
+              </div>
+              <div
+                class="skill-icon text-center p-4 bg-white rounded-lg shadow-md card-hover"
+              >
+                <i class="fab fa-php text-4xl text-indigo-500 mb-2"></i>
+                <p class="font-nunito text-sm font-medium">PHP</p>
+              </div>
+
+              <div
+                class="skill-icon text-center p-4 bg-white rounded-lg shadow-md card-hover"
+              >
+                <i class="fas fa-flask text-4xl text-gray-700 mb-2"></i>
+                <p class="font-nunito text-sm font-medium">Flask</p>
+              </div>
+
+              <div
+                class="skill-icon text-center p-4 bg-white rounded-lg shadow-md card-hover"
+              >
+                <i class="fas fa-leaf text-4xl text-green-800 mb-2"></i>
+                <p class="font-nunito text-sm font-medium">Django</p>
+              </div>
+
+              <div
+                class="skill-icon text-center p-4 bg-white rounded-lg shadow-md card-hover"
+              >
+                <i class="fab fa-laravel text-4xl text-red-500 mb-2"></i>
+                <p class="font-nunito text-sm font-medium">Laravel</p>
+              </div>
+
+              <div
+                class="skill-icon text-center p-4 bg-white rounded-lg shadow-md card-hover"
+              >
+                <i class="fas fa-database text-4xl text-gray-600 mb-2"></i>
+                <p class="font-nunito text-sm font-medium">SQL</p>
+              </div>
+              <div
+                class="skill-icon text-center p-4 bg-white rounded-lg shadow-md card-hover"
+              >
+                <i class="fas fa-leaf text-4xl text-green-600 mb-2"></i>
+                <p class="font-nunito text-sm font-medium">MongoDB</p>
+              </div>
+              <div
+                class="skill-icon text-center p-4 bg-white rounded-lg shadow-md card-hover"
+              >
+                <i class="fas fa-database text-4xl text-yellow-600 mb-2"></i>
+                <p class="font-nunito text-sm font-medium">DynamoDB</p>
+              </div>
+              <div
+                class="skill-icon text-center p-4 bg-white rounded-lg shadow-md card-hover"
+              >
+                <i class="fas fa-search text-4xl text-blue-500 mb-2"></i>
+                <p class="font-nunito text-sm font-medium">OpenSearch</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Frontend Development -->
+          <div class="mb-10">
+            <h4 class="text-xl font-outfit font-semibold text-gray-800 mb-6">
+              Frontend Development
+            </h4>
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
+              <div
+                class="skill-icon text-center p-4 bg-white rounded-lg shadow-md card-hover"
+              >
+                <i class="fab fa-html5 text-4xl text-orange-500 mb-2"></i>
+                <p class="font-nunito text-sm font-medium">HTML5</p>
+              </div>
+              <div
+                class="skill-icon text-center p-4 bg-white rounded-lg shadow-md card-hover"
+              >
+                <i class="fab fa-css3-alt text-4xl text-blue-500 mb-2"></i>
+                <p class="font-nunito text-sm font-medium">CSS3</p>
+              </div>
+              <div
+                class="skill-icon text-center p-4 bg-white rounded-lg shadow-md card-hover"
+              >
+                <i class="fab fa-js-square text-4xl text-yellow-500 mb-2"></i>
+                <p class="font-nunito text-sm font-medium">JavaScript</p>
+              </div>
+              <div
+                class="skill-icon text-center p-4 bg-white rounded-lg shadow-md card-hover"
+              >
+                <i class="fab fa-vuejs text-4xl text-green-400 mb-2"></i>
+                <p class="font-nunito text-sm font-medium">Vue.js</p>
+              </div>
+              <div
+                class="skill-icon text-center p-4 bg-white rounded-lg shadow-md card-hover"
+              >
+                <i class="fab fa-react text-4xl text-blue-400 mb-2"></i>
+                <p class="font-nunito text-sm font-medium">React</p>
+              </div>
+              <div
+                class="skill-icon text-center p-4 bg-white rounded-lg shadow-md card-hover"
+              >
+                <i class="fab fa-bootstrap text-4xl text-purple-500 mb-2"></i>
+                <p class="font-nunito text-sm font-medium">Bootstrap</p>
+              </div>
+              <div
+                class="skill-icon text-center p-4 bg-white rounded-lg shadow-md card-hover"
+              >
+                <i class="fas fa-wind text-4xl text-sky-400 mb-2"></i>
+                <p class="font-nunito text-sm font-medium">Tailwind CSS</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- ML/AI & Tools -->
+          <div class="mb-10">
+            <h4 class="text-xl font-outfit font-semibold text-gray-800 mb-6">
+              ML/AI & DevOps
+            </h4>
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+              <div
+                class="skill-icon text-center p-4 bg-white rounded-lg shadow-md card-hover"
+              >
+                <i class="fas fa-brain text-4xl text-purple-500 mb-2"></i>
+                <p class="font-nunito text-sm font-medium">PyTorch</p>
+              </div>
+              <div
+                class="skill-icon text-center p-4 bg-white rounded-lg shadow-md card-hover"
+              >
+                <i class="fas fa-robot text-4xl text-orange-500 mb-2"></i>
+                <p class="font-nunito text-sm font-medium">TensorFlow</p>
+              </div>
+              <div
+                class="skill-icon text-center p-4 bg-white rounded-lg shadow-md card-hover"
+              >
+                <i class="fab fa-docker text-4xl text-blue-500 mb-2"></i>
+                <p class="font-nunito text-sm font-medium">Docker</p>
+              </div>
+              <div
+                class="skill-icon text-center p-4 bg-white rounded-lg shadow-md card-hover"
+              >
+                <i class="fab fa-linux text-4xl text-black mb-2"></i>
+                <p class="font-nunito text-sm font-medium">Linux</p>
+              </div>
+              <div
+                class="skill-icon text-center p-4 bg-white rounded-lg shadow-md card-hover"
+              >
+                <i class="fab fa-git-alt text-4xl text-red-500 mb-2"></i>
+                <p class="font-nunito text-sm font-medium">Git</p>
+              </div>
+              <div
+                class="skill-icon text-center p-4 bg-white rounded-lg shadow-md card-hover"
+              >
+                <i class="fas fa-server text-4xl text-gray-600 mb-2"></i>
+                <p class="font-nunito text-sm font-medium">Nginx</p>
+              </div>
+              <div
+                class="skill-icon text-center p-4 bg-white rounded-lg shadow-md card-hover"
+              >
+                <i class="fas fa-c text-4xl text-gray-800 mb-2"></i>
+                <p class="font-nunito text-sm font-medium">C</p>
+              </div>
+              <div
+                class="skill-icon text-center p-4 bg-white rounded-lg shadow-md card-hover"
+              >
+                <i class="fas fa-code text-4xl text-indigo-700 mb-2"></i>
+                <p class="font-nunito text-sm font-medium">C++</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Blog Posts Section -->
+        <div class="mb-12">
+          <h3 class="text-2xl font-outfit font-bold text-gray-900 mb-8">
+            Featured Blog Posts
+          </h3>
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Blog Post 1 -->
+            <div
+              class="bg-white rounded-xl shadow-lg overflow-hidden card-hover"
+            >
+              <div class="p-6">
+                <div class="flex items-center mb-4">
+                  <div
+                    class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center"
+                  >
+                    <i class="fas fa-brain text-white text-xl"></i>
+                  </div>
+                  <div class="ml-4">
+                    <span
+                      class="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded-full font-medium"
+                      >Machine Learning</span
+                    >
+                  </div>
+                </div>
+                <h4 class="text-lg font-outfit font-bold text-gray-900 mb-3">
+                  Brain Tumor Detection using MRI Scanned Images
+                </h4>
+                <p class="text-gray-600 font-nunito text-sm mb-4">
+                  Deep dive into medical AI: Building CNN models to classify
+                  brain tumors from MRI scans with high accuracy.
+                </p>
+                <a
+                  href="https://medium.com/@musoye1/brain-tumor-classifier-based-on-brain-mri-images-b537e4d82d8d"
+                  class="text-accent hover:underline font-medium inline-flex items-center"
+                >
+                  Read Article <i class="fas fa-arrow-right ml-1"></i>
+                </a>
+              </div>
+            </div>
+
+            <!-- Blog Post 2 -->
+            <div
+              class="bg-white rounded-xl shadow-lg overflow-hidden card-hover"
+            >
+              <div class="p-6">
+                <div class="flex items-center mb-4">
+                  <div
+                    class="w-12 h-12 bg-gradient-to-br from-blue-500 to-teal-500 rounded-lg flex items-center justify-center"
+                  >
+                    <i class="fab fa-linux text-white text-xl"></i>
+                  </div>
+                  <div class="ml-4">
+                    <span
+                      class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full font-medium"
+                      >System Administration</span
+                    >
+                  </div>
+                </div>
+                <h4 class="text-lg font-outfit font-bold text-gray-900 mb-3">
+                  Processes on Linux
+                </h4>
+                <p class="text-gray-600 font-nunito text-sm mb-4">
+                  Understanding Linux process management, from creation to
+                  termination, and everything in between.
+                </p>
+                <a
+                  href="https://musoye.hashnode.dev/processes-on-linux"
+                  class="text-accent hover:underline font-medium inline-flex items-center"
+                >
+                  Read Article <i class="fas fa-arrow-right ml-1"></i>
+                </a>
+              </div>
+            </div>
+
+            <!-- Blog Post 3 -->
+            <div
+              class="bg-white rounded-xl shadow-lg overflow-hidden card-hover"
+            >
+              <div class="p-6">
+                <div class="flex items-center mb-4">
+                  <div
+                    class="w-12 h-12 bg-gradient-to-br from-green-500 to-blue-500 rounded-lg flex items-center justify-center"
+                  >
+                    <i class="fas fa-globe text-white text-xl"></i>
+                  </div>
+                  <div class="ml-4">
+                    <span
+                      class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full font-medium"
+                      >Web Development</span
+                    >
+                  </div>
+                </div>
+                <h4 class="text-lg font-outfit font-bold text-gray-900 mb-3">
+                  What Happens When You Press Google.com and Press Enter
+                </h4>
+                <p class="text-gray-600 font-nunito text-sm mb-4">
+                  A comprehensive breakdown of the web request journey from DNS
+                  lookup to page rendering.
+                </p>
+                <a
+                  href="https://medium.com/%40musoye1/what-happens-when-you-type-https-www-google-com-in-your-browser-and-press-enter-6b843a762dfa"
+                  class="text-accent hover:underline font-medium inline-flex items-center"
+                >
+                  Read Article <i class="fas fa-arrow-right ml-1"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Resume Button -->
+        <div class="text-center mt-12">
+          <a
+            href="#"
+            class="bg-accent hover:bg-orange-600 text-white px-8 py-3 rounded-lg font-outfit font-medium transition-colors shadow-lg inline-block"
+            onclick="window.open('./images/mustapha_oyebamiji_combined.pdf', '_blank')"
+          >
+            View Resume <i class="fas fa-download ml-2"></i>
+          </a>
         </div>
       </div>
+    </section>
 
-      <div class="project-num row">
-        <div class="col-md-5 col-xs-5 p-img"><img src="./property/commerce.png" alt=""></div>
-        <div class="col-md-7 col-xs-7" style="color: black;">
-          <h3 class="p-head">The E-Millenial Store</h3>
-          <p class="p-pr">Done as part of a final project @Ustacky.com for completion of fullstack course</p>
-          <p class="p-pro">
-            Built with: HTML, CSS, JS.
+    <!-- Projects Section -->
+    <section id="projects-section" class="bg-gray-50 py-16 section-hidden">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2
+          class="text-3xl font-outfit font-bold text-gray-900 mb-12 text-center"
+        >
+          Featured Projects
+        </h2>
+
+        <!-- Backend Projects Section -->
+        <div class="mb-16">
+          <h3
+            class="text-2xl font-outfit font-bold text-gray-800 mb-8 text-center"
+          >
+            Backend Development
+          </h3>
+
+          <div class="grid gap-8">
+            <!-- Peeriva - Backend Engineer -->
+            <div
+              class="bg-white rounded-xl shadow-lg overflow-hidden card-hover"
+            >
+              <div class="md:flex">
+                <div class="md:w-1/3">
+                  <div
+                    class="h-48 md:h-full bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center"
+                  >
+                    <i class="fas fa-server text-white text-6xl"></i>
+                  </div>
+                </div>
+                <div class="md:w-2/3 p-8">
+                  <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-2xl font-outfit font-bold text-gray-900">
+                      Backend Engineer
+                    </h3>
+                    <span
+                      class="text-sm bg-blue-100 text-blue-800 px-3 py-1 rounded-full font-medium"
+                      >Current</span
+                    >
+                  </div>
+                  <p class="text-lg font-semibold text-gray-700 mb-2">
+                    Peeriva
+                  </p>
+                  <p class="text-sm text-gray-500 mb-4">
+                    January 2025 – April 2025
+                  </p>
+                  <p class="text-gray-600 font-nunito mb-4">
+                    Built scalable microservices including notification system
+                    with Redis and Amazon SQS, user activity analytics with
+                    DynamoDB, and comprehensive search architecture with AWS
+                    OpenSearch. Optimized performance with caching and
+                    distributed processing.
+                  </p>
+                  <p class="text-sm text-gray-500 font-nunito mb-4">
+                    <strong>Built with:</strong> Django, Redis, PostgreSQL, AWS
+                    DynamoDB, AWS OpenSearch, Amazon SQS
+                  </p>
+                  <div class="flex space-x-4">
+                    <a
+                      href="https://www.linkedin.com/company/peeriva"
+                      class="text-accent hover:underline font-medium"
+                      >View Details</a
+                    >
+                    <a
+                      href="https://www.linkedin.com/company/peeriva"
+                      class="text-accent hover:underline font-medium inline-flex items-center"
+                    >
+                      Learn More <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- NGREEN LOGISTICS - Backend Developer -->
+            <div
+              class="bg-white rounded-xl shadow-lg overflow-hidden card-hover"
+            >
+              <div class="md:flex">
+                <div class="md:w-1/3">
+                  <div
+                    class="h-48 md:h-full bg-gradient-to-br from-green-500 to-teal-500 flex items-center justify-center"
+                  >
+                    <i class="fas fa-truck text-white text-6xl"></i>
+                  </div>
+                </div>
+                <div class="md:w-2/3 p-8">
+                  <h3 class="text-2xl font-outfit font-bold text-gray-900 mb-4">
+                    Backend Developer
+                  </h3>
+                  <p class="text-lg font-semibold text-gray-700 mb-2">
+                    NGREEN LOGISTICS
+                  </p>
+                  <p class="text-gray-600 font-nunito mb-4">
+                    Designed and deployed logistics application backend using
+                    MERN stack. Built RESTful APIs for user authentication,
+                    shipment tracking, and order management with optimized
+                    database queries for large datasets.
+                  </p>
+                  <p class="text-sm text-gray-500 font-nunito mb-4">
+                    <strong>Built with:</strong> MongoDB, Express.js, Node.js,
+                    JWT Authentication
+                  </p>
+                  <div class="flex space-x-4">
+                    <a
+                      href="#"
+                      onclick="alert('Access denied. This is a private project and the source code is restricted.')"
+                      class="text-accent hover:underline font-medium"
+                      >GitHub Repo</a
+                    >
+                    <a
+                      href="#"
+                      onclick="alert('Access denied. This is a private project and the source code is restricted.')"
+                      class="text-accent hover:underline font-medium inline-flex items-center"
+                    >
+                      View Project <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- APIENG - Backend Developer Intern -->
+            <div
+              class="bg-white rounded-xl shadow-lg overflow-hidden card-hover"
+            >
+              <div class="md:flex">
+                <div class="md:w-1/3">
+                  <div
+                    class="h-48 md:h-full bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center"
+                  >
+                    <i class="fas fa-chart-line text-white text-6xl"></i>
+                  </div>
+                </div>
+                <div class="md:w-2/3 p-8">
+                  <h3 class="text-2xl font-outfit font-bold text-gray-900 mb-4">
+                    Backend Developer Intern
+                  </h3>
+                  <p class="text-lg font-semibold text-gray-700 mb-2">APIENG</p>
+                  <p class="text-gray-600 font-nunito mb-4">
+                    Contributed to API monitoring system development measuring
+                    energy consumption of endpoints. Collaborated on scalable
+                    microservices architecture and API design using Go (Golang).
+                  </p>
+                  <p class="text-sm text-gray-500 font-nunito mb-4">
+                    <strong>Built with:</strong> Go (Golang), Microservices
+                    Architecture
+                  </p>
+                  <div class="flex space-x-4">
+                    <a
+                      href="#"
+                      onclick="alert('Access denied. This is a private project and the source code is restricted.')"
+                      class="text-accent hover:underline font-medium"
+                      >Learn More</a
+                    >
+                    <a
+                      href="#"
+                      onclick="alert('Access denied. This is a private project and the source code is restricted.')"
+                      class="text-accent hover:underline font-medium inline-flex items-center"
+                    >
+                      View Details <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- HelpBot - ALX SE Final Project -->
+            <div
+              class="bg-white rounded-xl shadow-lg overflow-hidden card-hover"
+            >
+              <div class="md:flex">
+                <div class="md:w-1/3">
+                  <div
+                    class="h-48 md:h-full bg-gradient-to-br from-purple-500 to-indigo-500 flex items-center justify-center"
+                  >
+                    <i class="fas fa-robot text-white text-6xl"></i>
+                  </div>
+                </div>
+                <div class="md:w-2/3 p-8">
+                  <h3 class="text-2xl font-outfit font-bold text-gray-900 mb-4">
+                    HelpBot - AI Document Assistant
+                  </h3>
+                  <p class="text-lg font-semibold text-gray-700 mb-2">
+                    ALX SE Final Project
+                  </p>
+                  <p class="text-gray-600 font-nunito mb-4">
+                    Developed AI-powered application backend that analyzes PDF
+                    documents and answers user queries. Implemented PDF parsing,
+                    natural language processing with OpenAI API, and efficient
+                    query-response handling.
+                  </p>
+                  <p class="text-sm text-gray-500 font-nunito mb-4">
+                    <strong>Built with:</strong> Node.js, OpenAI API, PDF
+                    Processing, Vite Frontend Integration
+                  </p>
+                  <div class="flex space-x-4">
+                    <a
+                      href="https://github.com/Musoye/helpbot"
+                      class="text-accent hover:underline font-medium"
+                      >GitHub Repo</a
+                    >
+                    <a
+                      href="https://github.com/Musoye/helpbot"
+                      class="text-accent hover:underline font-medium"
+                      >Live Demo</a
+                    >
+                    <a
+                      href="#"
+                      class="text-accent hover:underline font-medium inline-flex items-center"
+                    >
+                      View Project <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Time Minder - ALX SE Project -->
+            <div
+              class="bg-white rounded-xl shadow-lg overflow-hidden card-hover"
+            >
+              <div class="md:flex">
+                <div class="md:w-1/3">
+                  <div
+                    class="h-48 md:h-full bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center"
+                  >
+                    <i class="fas fa-clock text-white text-6xl"></i>
+                  </div>
+                </div>
+                <div class="md:w-2/3 p-8">
+                  <h3 class="text-2xl font-outfit font-bold text-gray-900 mb-4">
+                    Time Minder - Project Management
+                  </h3>
+                  <p class="text-lg font-semibold text-gray-700 mb-2">
+                    ALX SE Program
+                  </p>
+                  <p class="text-gray-600 font-nunito mb-4">
+                    Full-stack project management software for scheduling and
+                    task management. Built with Flask backend, MySQL database,
+                    and responsive frontend. Deployed with Nginx and HAProxy for
+                    load balancing.
+                  </p>
+                  <p class="text-sm text-gray-500 font-nunito mb-4">
+                    <strong>Built with:</strong> Flask, MySQL,
+                    HTML/CSS/JavaScript, Nginx, HAProxy
+                  </p>
+                  <div class="flex space-x-4">
+                    <a href="#" class="text-accent hover:underline font-medium"
+                      >GitHub Repo</a
+                    >
+                    <a
+                      href="https://github.com/Musoye/Time-Minder"
+                      class="text-accent hover:underline font-medium"
+                      >Documentation</a
+                    >
+                    <a
+                      href="https://github.com/Musoye/Time-Minder"
+                      class="text-accent hover:underline font-medium inline-flex items-center"
+                    >
+                      View Project <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Machine Learning Projects Section -->
+        <div>
+          <h3
+            class="text-2xl font-outfit font-bold text-gray-800 mb-8 text-center"
+          >
+            Machine Learning & AI
+          </h3>
+
+          <div class="grid gap-8">
+            <!-- Brain Tumor Detection -->
+            <div
+              class="bg-white rounded-xl shadow-lg overflow-hidden card-hover"
+            >
+              <div class="md:flex">
+                <div class="md:w-1/3">
+                  <div
+                    class="h-48 md:h-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center"
+                  >
+                    <i class="fas fa-brain text-white text-6xl"></i>
+                  </div>
+                </div>
+                <div class="md:w-2/3 p-8">
+                  <h3 class="text-2xl font-outfit font-bold text-gray-900 mb-4">
+                    Brain Tumor Detection
+                  </h3>
+                  <p class="text-gray-600 font-nunito mb-4">
+                    Built a custom CNN and fine-tuned ResNet model to classify
+                    brain tumors from MRI images. Focused on image
+                    preprocessing, model evaluation, and created a real-time web
+                    app for predictions.
+                  </p>
+                  <p class="text-sm text-gray-500 font-nunito mb-4">
+                    <strong>Built with:</strong> Python, PyTorch, TensorFlow,
+                    OpenCV, Flask
+                  </p>
+                  <div class="flex space-x-4">
+                    <a
+                      href="https://github.com/Musoye/BrainTumorDetection"
+                      class="text-accent hover:underline font-medium"
+                      >GitHub Repo</a
+                    >
+                    <a
+                      href="https://medium.com/@musoye1/brain-tumor-classifier-based-on-brain-mri-images-b537e4d82d8d"
+                      class="text-accent hover:underline font-medium"
+                      >Medium Article</a
+                    >
+                    <a
+                      href="https://github.com/Musoye/BrainTumorDetection"
+                      class="text-accent hover:underline font-medium inline-flex items-center"
+                    >
+                      View Project <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- GPT-2 Fine-tuning -->
+            <div
+              class="bg-white rounded-xl shadow-lg overflow-hidden card-hover"
+            >
+              <div class="md:flex">
+                <div class="md:w-1/3">
+                  <div
+                    class="h-48 md:h-full bg-gradient-to-br from-blue-500 to-teal-500 flex items-center justify-center"
+                  >
+                    <i class="fas fa-comments text-white text-6xl"></i>
+                  </div>
+                </div>
+                <div class="md:w-2/3 p-8">
+                  <h3 class="text-2xl font-outfit font-bold text-gray-900 mb-4">
+                    Fine-tuning GPT-2 for Sentiment Analysis
+                  </h3>
+                  <p class="text-gray-600 font-nunito mb-4">
+                    Rebuilt GPT-2 architecture and trained it on custom dataset
+                    for sentiment classification. Worked on tokenizer setup,
+                    model fine-tuning, and adapting LLM for downstream tasks.
+                  </p>
+                  <p class="text-sm text-gray-500 font-nunito mb-4">
+                    <strong>Built with:</strong> Python, PyTorch, Transformers
+                  </p>
+                  <div class="flex space-x-4">
+                    <a
+                      href="https://github.com/Musoye/LLM"
+                      class="text-accent hover:underline font-medium"
+                      >GitHub Repo</a
+                    >
+                    <a
+                      href="https://github.com/Musoye/LLM"
+                      class="text-accent hover:underline font-medium inline-flex items-center"
+                    >
+                      View Project <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Fraud Detection -->
+            <div
+              class="bg-white rounded-xl shadow-lg overflow-hidden card-hover"
+            >
+              <div class="md:flex">
+                <div class="md:w-1/3">
+                  <div
+                    class="h-48 md:h-full bg-gradient-to-br from-red-500 to-orange-500 flex items-center justify-center"
+                  >
+                    <i class="fas fa-shield-alt text-white text-6xl"></i>
+                  </div>
+                </div>
+                <div class="md:w-2/3 p-8">
+                  <h3 class="text-2xl font-outfit font-bold text-gray-900 mb-4">
+                    Fraud Detection System
+                  </h3>
+                  <p class="text-gray-600 font-nunito mb-4">
+                    Developed ML model to flag potentially fraudulent financial
+                    transactions using monetary data patterns. Deployed web
+                    interface to simulate testing and prediction workflows.
+                  </p>
+                  <p class="text-sm text-gray-500 font-nunito mb-4">
+                    <strong>Built with:</strong> Python, Scikit-learn, Flask,
+                    Pandas
+                  </p>
+                  <div class="flex space-x-4">
+                    <a
+                      href="https://github.com/Musoye/FraudDetect"
+                      class="text-accent hover:underline font-medium"
+                      >GitHub Repo</a
+                    >
+                    <a
+                      href="https://github.com/Musoye/FraudDetect"
+                      class="text-accent hover:underline font-medium inline-flex items-center"
+                    >
+                      View Project <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Facial Emotion Recognition -->
+            <div
+              class="bg-white rounded-xl shadow-lg overflow-hidden card-hover"
+            >
+              <div class="md:flex">
+                <div class="md:w-1/3">
+                  <div
+                    class="h-48 md:h-full bg-gradient-to-br from-green-500 to-blue-500 flex items-center justify-center"
+                  >
+                    <i class="fas fa-smile text-white text-6xl"></i>
+                  </div>
+                </div>
+                <div class="md:w-2/3 p-8">
+                  <h3 class="text-2xl font-outfit font-bold text-gray-900 mb-4">
+                    Facial Emotion Recognition
+                  </h3>
+                  <p class="text-gray-600 font-nunito mb-4">
+                    Built model that detects human emotions from facial images.
+                    Includes web app where users can upload photos and get
+                    predictions like happy, sad, angry, or surprised.
+                  </p>
+                  <p class="text-sm text-gray-500 font-nunito mb-4">
+                    <strong>Built with:</strong> Python, OpenCV, TensorFlow,
+                    Streamlit
+                  </p>
+                  <div class="flex space-x-4">
+                    <a
+                      href="https://github.com/Musoye/ai/tree/main/facial_emotion"
+                      class="text-accent hover:underline font-medium"
+                      >GitHub Repo</a
+                    >
+                    <a
+                      href="https://github.com/Musoye/ai/tree/main/facial_emotion"
+                      class="text-accent hover:underline font-medium inline-flex items-center"
+                    >
+                      View Project <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white py-12">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-8">
+          <h3 class="text-2xl font-outfit font-bold mb-2">
+            Let's get started on something great
+          </h3>
+          <h4 class="text-lg font-outfit mb-4">Contact</h4>
+          <div class="space-y-2 font-nunito">
+            <p>
+              <a
+                href="mailto:oyebamijimustapha44@gmail.com"
+                class="hover:text-accent transition-colors"
+              >
+                Email: oyebamijimustapha44@gmail.com
+              </a>
+            </p>
+            <p>
+              <a
+                href="tel:+2349076109309"
+                class="hover:text-accent transition-colors"
+              >
+                Phone: +234-09076109309
+              </a>
+            </p>
+          </div>
+        </div>
+
+        <div class="flex justify-center space-x-6 mb-8">
+          <a
+            href="https://twitter.com/musoye1"
+            target="_blank"
+            class="text-2xl hover:text-accent transition-colors"
+          >
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a
+            href="https://linkedin.com/in/musoye"
+            target="_blank"
+            class="text-2xl hover:text-accent transition-colors"
+          >
+            <i class="fab fa-linkedin"></i>
+          </a>
+          <a
+            href="https://github.com/musoye"
+            target="_blank"
+            class="text-2xl hover:text-accent transition-colors"
+          >
+            <i class="fab fa-github"></i>
+          </a>
+          <a
+            href="https://medium.com/@musoye1"
+            target="_blank"
+            class="text-2xl hover:text-accent transition-colors"
+          >
+            <i class="fab fa-medium"></i>
+          </a>
+          <a
+            href="https://musoye.hashnode.dev"
+            target="_blank"
+            class="text-2xl hover:text-accent transition-colors"
+          >
+            <i class="fas fa-blog"></i>
+          </a>
+        </div>
+
+        <hr class="border-gray-600 mb-6" />
+
+        <div
+          class="flex flex-col md:flex-row justify-between items-center text-sm font-nunito"
+        >
+          <p>&copy; Copyright 2024-2025, All Rights Reserved</p>
+          <p class="mt-2 md:mt-0">
+            Skill Development Lead @
+            <span class="text-accent font-semibold"
+              >Google Developer Group on Campus, FUTA</span
+            >
           </p>
-          <a href="https://github.com/Musoye/e-commerce" target="_blank" style="color: #dd6b18; text-decoration: none;">code link</a>
-          <a target="_blank" class="p-link" href="https://musta.netlify.app/">View project <span class="fa fa fa-arrow-right fa-angle-up"
-              style="color: #dd6b18;"></span></a>
         </div>
       </div>
+    </footer>
 
-      <div class="project-num row">
-        <div class="col-md-5 col-xs-5 p-img"><img src="./property/Clovar.png" alt=""></div>
-        <div class="col-md-7 col-xs-7" style="color: black;">
-          <h3 class="p-head">Clovar CMS</h3>
-          <p class="p-pr">A content management site built during my Zuri Internship </p>
-          <p class="p-pro">
-            Built with: HTML, CSS, JS, Python/Django and sqlite3
-          </p>
-          <a href="#" onclick="alert('Private Project! Not allow to view the source code')" style="color: #dd6b18; text-decoration: none;">code link</a>
-          <a class="p-link" href="https://zuri-training.github.io/clovar-documentation/" target="_blank">View project <span class="fa fa fa-arrow-right fa-angle-up"
-              style="color: #dd6b18;"></span></a>
+    <!-- Contact Modal -->
+    <div
+      id="contact-modal"
+      class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50 opacity-0 pointer-events-none transition-opacity duration-300"
+    >
+      <div
+        class="bg-white rounded-xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto"
+      >
+        <div class="p-6">
+          <div class="flex justify-between items-center mb-6">
+            <h3 class="text-2xl font-outfit font-bold text-gray-900">
+              Get in touch
+            </h3>
+            <button
+              id="close-modal"
+              class="text-gray-400 hover:text-gray-600 text-2xl"
+            >
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+
+          <form id="contact-form" class="space-y-4">
+            <div>
+              <label
+                for="name"
+                class="block text-sm font-nunito font-medium text-gray-700 mb-1"
+                >Name</label
+              >
+              <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
+              />
+            </div>
+
+            <div>
+              <label
+                for="email"
+                class="block text-sm font-nunito font-medium text-gray-700 mb-1"
+                >Email</label
+              >
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
+              />
+            </div>
+
+            <div>
+              <label
+                for="message"
+                class="block text-sm font-nunito font-medium text-gray-700 mb-1"
+                >Message</label
+              >
+              <textarea
+                id="message"
+                name="message"
+                rows="5"
+                required
+                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
+              ></textarea>
+            </div>
+
+            <button
+              type="submit"
+              class="w-full bg-accent hover:bg-orange-600 text-white py-3 rounded-lg font-outfit font-medium transition-colors"
+            >
+              Send Message <i class="fas fa-envelope ml-2"></i>
+            </button>
+          </form>
         </div>
       </div>
-
     </div>
 
+    <script>
+      // Mobile menu toggle
+      const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+      const mobileMenu = document.getElementById("mobile-menu");
 
+      mobileMenuBtn.addEventListener("click", () => {
+        mobileMenu.classList.toggle("section-hidden");
+      });
 
-  </div>
+      // Section toggle functionality
+      const aboutBtn = document.getElementById("about-btn");
+      const projectsBtn = document.getElementById("projects-btn");
+      const aboutSection = document.getElementById("about-section");
+      const projectsSection = document.getElementById("projects-section");
 
-  <!-- Footer Section -->
-  <footer class="container-fluid footer">
-    <img class='f-img' src="./property/Maclogo.png" alt="">
-    <p class="f-para-1">Let's get started on something great</p>
-    <p class="f-para">Contact</p>
-    <p class="f-para f-para-2"><a href="mailto:mmusoye@gmail.com" target="_blank">Email: mmusoye@gmail.com</a> <a
-        href="tel:+2347025770113" target="_blank">Phone: +234-07025770113</a></p>
+      function showAbout(event, isInitialLoad = false) {
+        if (event) event.preventDefault(); // Prevent default link behavior
+        aboutSection.classList.remove("section-hidden");
+        projectsSection.classList.add("section-hidden");
+        aboutBtn.classList.add("bg-primary", "text-white");
+        aboutBtn.classList.remove("text-primary");
+        projectsBtn.classList.remove("bg-primary", "text-white");
+        projectsBtn.classList.add("text-primary");
+        if (!isInitialLoad) {
+          aboutSection.scrollIntoView({ behavior: "smooth" });
+        }
+      }
 
-    <div class="foot-icon" style="color: white;">
-      <a href="https://twitter.com/musoye1" target="_blank" class="img"><img src="./property/twitter.png" alt=""></a>
-      <a href="https://linkedin.com/in/musoye" target="_blank" class="img"><img src="./property/link.png" alt=""></a>
-      <a href="https://musoye.hashnode.dev" target="_blank" class="img"><img src="./property/hashnode.png" alt=""></a>
-    </div>
+      function showProjects(event) {
+        if (event) event.preventDefault();
+        projectsSection.classList.remove("section-hidden");
+        aboutSection.classList.add("section-hidden");
+        projectsBtn.classList.add("bg-primary", "text-white");
+        projectsBtn.classList.remove("text-primary");
+        aboutBtn.classList.remove("bg-primary", "text-white");
+        aboutBtn.classList.add("text-primary");
+        projectsSection.scrollIntoView({ behavior: "smooth" });
+      }
 
-    <hr class="visible-md visible-lg visible-sm"/>
+      // Event listeners for toggle buttons
+      aboutBtn.addEventListener("click", showAbout);
+      projectsBtn.addEventListener("click", showProjects);
 
-    <div class="f-last  row">
-      <p class="col-md-10 c">&copy; Copyright 2021-2022, All Rights Reserved</p>
-      <p class="col-md-2 " style="padding-right: 3px;color: #fefefe"><a href="https://www.behance.net/enobongedidion" target="_blank" style="text-decoration: null;color: #fefefe;"><span style="display: inline-block;color: #303 !important;background-color: white;border-radius: 50%;padding: 5px;font-weight: 900;">Bě</span> Designed by <span style="text-decoration: underline;">Eno</span></a>   
-      </p>
-    </div>
-  </footer>
+      const contactBtn = document.getElementById("contact-btn");
+      const contactModal = document.getElementById("contact-modal");
+      const closeModal = document.getElementById("close-modal");
+      const contactForm = document.getElementById("contact-form");
 
+      // Show modal
+      contactBtn.addEventListener("click", () => {
+        contactModal.classList.remove("opacity-0", "pointer-events-none");
+        document.body.style.overflow = "hidden"; // Prevent background scroll
+      });
 
-  <!-- Contact form implementation -->
+      // Hide modal
+      function hideContactModal() {
+        contactModal.classList.add("opacity-0", "pointer-events-none");
+        document.body.style.overflow = "auto"; // Restore scroll
+      }
 
-  <div class="bg-cover contact-form" id="contact-form">
-    <button id="cancel_contact" style='margin-left: 91%;margin-top:5px;padding-top: 2px;border: 0px hidden white;background-color: transparent;'><img src="./property/x.svg" alt=""></button>
+      closeModal.addEventListener("click", hideContactModal);
 
-    <div class="form">
-      <h3 class="text-center">Get in touch</h3>
+      // Click outside to close
+      contactModal.addEventListener("click", (e) => {
+        if (e.target === contactModal) {
+          hideContactModal();
+        }
+      });
 
+      const navLinks = document.querySelectorAll(".nav-link");
+      navLinks.forEach((link) => {
+        link.addEventListener("click", function (e) {
+          e.preventDefault();
+          const targetId = this.getAttribute("href");
+          const targetSection = document.querySelector(targetId);
 
-      <form style="width: 90%;margin-left: auto;margin-right: auto;" id="contact-form">
-        <div class="form-group">
-          <label for="name">Name</label>
-          <input type="text" class="form-control" name="name" id="name" placeholder="Enter your Name" required>
-        </div>
-        <div class="form-group">
-          <label for="email">Email Address</label>
-          <input type="email" class="form-control" name="email" id="email" placeholder="Enter your Email Address"
-            required>
-        </div>
-        <div style='padding-bottom: 20px;' class="form-group">
-          <label for="message">Message</label>
-          <textarea name="message" class="form-control" id="message" cols="30" rows="7" placeholder="Enter your message"
-            required></textarea>
-        </div>
-        <button class="btn btn-md btn-block btn-yellow">Send message <span class="fa fa-envelope-open"
-            style="padding-left: 3px;color: white;"></span></button>
+          if (targetSection) {
+            // Handle section switching
+            if (targetId === "#about") {
+              showAbout(event);
+            } else if (targetId === "#projects") {
+              showProjects(event);
+            }
 
-        <p style='padding-bottom: 15px;'></p>
-      </form>
-    </div>
+            // Smooth scroll to target
+            targetSection.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
 
-  </div>
+            // Close mobile menu if open
+            mobileMenu.classList.add("section-hidden");
+          }
+        });
+      });
 
-  <script src=" ./script.js"></script>
-</body>
+      // Close mobile menu when clicking on links
+      const mobileNavLinks = document.querySelectorAll(
+        "#mobile-menu .nav-link"
+      );
+      mobileNavLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          mobileMenu.classList.add("section-hidden");
+        });
+      });
 
+      // Escape key to close modal
+      document.addEventListener("keydown", function (e) {
+        if (
+          e.key === "Escape" &&
+          !contactModal.classList.contains("section-hidden")
+        ) {
+          contactModal.classList.add("section-hidden");
+          document.body.style.overflow = "auto";
+        }
+      });
+
+      // Initialize page - show about section by default
+      document.addEventListener("DOMContentLoaded", function () {
+        showAbout(event, true);
+      });
+    </script>
+  </body>
 </html>
