@@ -1,1437 +1,983 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Oyebamiji Mustapha Oyetunde - Musoye</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Anton&family=Nunito:ital,wght@0,200;0,300;0,400;0,600;1,200;1,300&family=Open+Sans:ital,wght@0,600;1,500&family=Outfit:wght@200;300;400;500;600&display=swap"
-      rel="stylesheet"
-    />
-    <meta property="og:title" content="Musoye's Portfolio" />
-    <meta
-      property="og:description"
-      content="A glimpse into Musoye’s web creations, design flair, and technical skills."
-    />
-    <meta property="og:image" content="https://musoye.tech/musoye_logo.png" />
-    <meta property="og:url" content="https://musoye.tech/" />
-    <meta property="og:type" content="website" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Musoye — Software Engineer</title>
 
-    <!-- 🐦 Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Musoye's Portfolio" />
-    <meta
-      name="twitter:description"
-      content="A glimpse into Musoye’s web creations, design flair, and technical skills."
-    />
-    <meta name="twitter:image" content="https://musoye.tech/musoye_logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@400;500&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
-    <link rel="icon" href="./musoye_logo.png" type="image/png" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
-
-    <!-- EmailJS -->
-    <script
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script
       type="text/javascript"
       src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"
     ></script>
-    <script type="text/javascript">
-      (function () {
-        // https://dashboard.emailjs.com/admin/account
-        emailjs.init("DPA5IFc1n_Ma0ZDJD");
-      })();
-    </script>
-    <script>
-      const contact = document.getElementById("contact-form");
-      const contact_modal = document.getElementById("contact-modal");
-      contact.addEventListener("submit", function (e) {
-        e.preventDefault();
+  <script>emailjs.init("DPA5IFc1n_Ma0ZDJD");</script>
 
-        const name = document.getElementById("name").value;
-        const email = document.getElementById("email").value;
-        const message = document.getElementById("message").value;
+  <meta property="og:title" content="Musoye — Software Engineer" />
+  <meta property="og:description" content="Backend engineer, ML explorer, builder of things that scale." />
+  <meta property="og:image" content="https://musoye.tech/musoye_logo.png" />
+  <meta property="og:url" content="https://musoye.tech/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="./musoye_logo.png" type="image/png" />
 
-        // EmailJS template parameters
-        const templateParams = {
-          from_name: name,
-          from_email: email,
-          message: message,
-          to_name: "Musoye",
-        };
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        // Show loading state
-        const submitBtn = e.target.querySelector('button[type="submit"]');
-        const originalText = submitBtn.innerHTML;
-        submitBtn.innerHTML =
-          'Sending... <i class="fas fa-spinner fa-spin ml-2"></i>';
-        submitBtn.disabled = true;
+    :root {
+      --ink:    #1c1916;
+      --warm:   #f5f0e8;
+      --paper:  #faf8f4;
+      --rust:   #c45c20;
+      --rust-light: #e8753a;
+      --muted:  #7a6f64;
+      --line:   #e2dbd0;
+      --deep:   #1a0e0a;
+    }
 
-        // Send email using EmailJS
-        emailjs
-          .send("service_t16lflp", "template_l6147p9", templateParams)
-          .then(function (response) {
-            console.log("SUCCESS!", response.status, response.text);
-            alert("Message sent successfully!");
-            contactForm.reset();
-          })
-          .catch(function (error) {
-            console.log("FAILED...", error);
-            alert(
-              "Failed to send message. Please try again or contact directly via email."
-            );
-          })
-          .finally(function () {
-            // Restore button state
-            setTimeout(() => {}, 3000);
-            submitBtn.innerHTML = originalText;
-            submitBtn.disabled = false;
-            contact_modal.classList.add("opacity-0", "pointer-events-none");
-            document.body.style.overflow = "auto";
-          });
-      });
-    </script>
+    html { scroll-behavior: smooth; }
 
-    <style>
-      .font-anton {
-        font-family: "Anton", sans-serif;
-      }
-      .font-nunito {
-        font-family: "Nunito", sans-serif;
-      }
-      .font-opensans {
-        font-family: "Open Sans", sans-serif;
-      }
-      .font-outfit {
-        font-family: "Outfit", sans-serif;
-      }
-      .bg-primary {
-        background-color: #330033;
-      }
-      .text-accent {
-        color: #dd6b18;
-      }
-      .bg-accent {
-        background-color: #dd6b18;
-      }
-      .bg-secondary {
-        background-color: #c49dc4;
-      }
+    body {
+      font-family: 'Manrope', sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
 
-      .hero-bg {
-        background: linear-gradient(135deg, #330033 0%, #4a0e4e 100%);
-      }
+    /* ─── NAV ─── */
+    #site-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 0 2rem;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(250,248,244,0.94);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
 
-      .card-hover {
-        transition: all 0.3s ease;
-      }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 1.2rem;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+    }
 
-      .card-hover:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-      }
+    .nav-links { display: flex; gap: 2rem; align-items: center; }
+    .nav-tab {
+      font-family: 'Manrope', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--muted);
+      cursor: pointer;
+      letter-spacing: 0.04em;
+      padding-bottom: 2px;
+      border: none;
+      border-bottom: 1.5px solid transparent;
+      background: none;
+      outline: none;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .nav-tab:hover { color: var(--ink); }
+    .nav-tab.active { color: var(--rust); border-bottom-color: var(--rust); }
 
-      .skill-icon {
-        transition: transform 0.3s ease;
-      }
+    .nav-socials { display: flex; gap: 1rem; }
+    .nav-socials a { font-size: 0.9rem; color: var(--muted); transition: color 0.2s; }
+    .nav-socials a:hover { color: var(--rust); }
 
-      .skill-icon:hover {
-        transform: scale(1.1);
-      }
+    /* ─── HERO ─── */
+    #hero {
+      background: var(--deep);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 80px 2rem 60px;
+      position: relative;
+      overflow: hidden;
+    }
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      background-size: 200px;
+      opacity: 0.3;
+      pointer-events: none;
+    }
 
-      .gradient-text {
-        background: linear-gradient(135deg, #dd6b18, #c49dc4);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-      }
+    .hero-inner { position: relative; max-width: 1100px; margin: 0 auto; width: 100%; }
 
-      /* Hide sections by default */
-      .section-hidden {
-        display: none;
-      }
+    .honor-image{
+  padding:0;
+  overflow:hidden;
+}
 
-      /* Contact form overlay */
-      .contact-overlay {
-        background: rgba(0, 0, 0, 0.8);
-        backdrop-filter: blur(5px);
-      }
-    </style>
-  </head>
+.honor-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:10px;
+}
 
-  <body class="bg-gray-50">
-    <!-- Navigation -->
-    <nav class="bg-primary shadow-lg fixed w-full top-0 z-50">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center h-16">
-          <div class="flex-shrink-0">
-            <span class="text-white font-outfit text-xl font-bold">MUSOYE</span>
-          </div>
+    .hero-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      color: var(--rust-light);
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 0.15s;
+    }
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: clamp(3.5rem, 9vw, 8rem);
+      color: #f5f0e8;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      opacity: 0;
+      animation: fadeUp 0.9s ease forwards 0.3s;
+    }
+    .hero-name em { font-style: italic; color: var(--rust-light); }
+    .hero-role {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      color: rgba(245,240,232,0.55);
+      margin-top: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 0.5s;
+    }
+    .hero-bio {
+      font-size: 1rem;
+      color: rgba(245,240,232,0.45);
+      max-width: 520px;
+      margin-top: 1.5rem;
+      line-height: 1.75;
+      font-weight: 400;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 0.65s;
+    }
+    .hero-actions {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+      margin-top: 2.5rem;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 0.8s;
+    }
+    .hero-photo {
+      position: absolute; right: 0; bottom: 0;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards 0.5s;
+    }
+    .hero-photo img {
+      width: 220px; height: 260px;
+      object-fit: cover;
+      border-radius: 2px;
+      filter: grayscale(20%) contrast(1.05);
+      box-shadow: -20px -20px 0 rgba(196,92,32,0.15);
+    }
+    .hero-numbers {
+      display: flex; gap: 3rem; flex-wrap: wrap;
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 1s;
+    }
+    .hero-num-val {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem; font-weight: 700;
+      color: #f5f0e8; display: block;
+    }
+    .hero-num-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem; color: rgba(245,240,232,0.3);
+      letter-spacing: 0.1em; text-transform: uppercase;
+    }
 
-          <!-- Desktop Menu -->
-          <div class="hidden md:block">
-            <div class="ml-10 flex items-baseline space-x-8">
-              <a
-                class="nav-link text-gray-300 hover:text-white px-3 py-2 text-sm font-nunito transition-colors"
-                onclick="showAbout(event)"
-                >About</a
-              >
-              <a
-                class="nav-link text-gray-300 hover:text-white px-3 py-2 text-sm font-nunito transition-colors change"
-                onclick="showProjects(event)"
-                >Projects</a
-              >
-            </div>
-          </div>
+    @keyframes fadeUp { from { opacity:0; transform:translateY(22px); } to { opacity:1; transform:none; } }
+    @keyframes fadeIn { from { opacity:0; } to { opacity:0.7; } }
 
-          <!-- Social Links -->
-          <div class="hidden md:flex items-center space-x-4">
-            <a
-              href="https://twitter.com/musoye1"
-              target="_blank"
-              class="text-gray-300 hover:text-white transition-colors"
-            >
-              <i class="fab fa-twitter"></i>
-            </a>
-            <a
-              href="https://linkedin.com/in/musoye"
-              target="_blank"
-              class="text-gray-300 hover:text-white transition-colors"
-            >
-              <i class="fab fa-linkedin"></i>
-            </a>
-            <a
-              href="https://github.com/musoye"
-              target="_blank"
-              class="text-gray-300 hover:text-white transition-colors"
-            >
-              <i class="fab fa-github"></i>
-            </a>
-            <a
-            href="https://medium.com/@musoye1"
-            target="_blank"
-            class="text-gray-300 hover:text-white transition-colors"
-          >
-            <i class="fab fa-medium"></i>
-          </a>
-          </div>
+    /* ─── BTN ─── */
+    .btn-rust {
+      background: var(--rust); color: white;
+      padding: 11px 28px; border-radius: 4px;
+      font-family: 'Manrope', sans-serif; font-weight: 600; font-size: 0.85rem;
+      letter-spacing: 0.04em; cursor: pointer; border: none;
+      transition: background 0.2s, transform 0.2s;
+      display: inline-flex; align-items: center; gap: 8px;
+      text-decoration: none;
+    }
+    .btn-rust:hover { background: #b05018; transform: translateY(-1px); }
+    .btn-ghost {
+      background: transparent; color: rgba(245,240,232,0.65);
+      padding: 11px 28px; border-radius: 4px;
+      font-family: 'Manrope', sans-serif; font-weight: 500; font-size: 0.85rem;
+      letter-spacing: 0.04em; cursor: pointer;
+      border: 1px solid rgba(245,240,232,0.2);
+      transition: all 0.2s;
+      display: inline-flex; align-items: center; gap: 8px;
+      text-decoration: none;
+    }
+    .btn-ghost:hover { border-color: rgba(245,240,232,0.5); color: #f5f0e8; transform: translateY(-1px); }
 
-          <!-- Mobile menu button -->
-          <div class="md:hidden">
-            <button
-              id="mobile-menu-btn"
-              class="text-gray-300 hover:text-white focus:outline-none"
-            >
-              <i class="fas fa-bars text-xl"></i>
-            </button>
-          </div>
-        </div>
+    /* ─── SECTION BAR ─── */
+    #section-bar {
+      background: var(--warm);
+      border-bottom: 1px solid var(--line);
+      position: sticky; top: 60px; z-index: 90;
+      padding: 0 2rem;
+    }
+    .section-bar-inner { max-width: 1100px; margin: 0 auto; display: flex; }
+    .sec-btn {
+      padding: 18px 28px;
+      font-family: 'Manrope', sans-serif; font-size: 0.82rem; font-weight: 500;
+      color: var(--muted); background: none; border: none;
+      border-bottom: 2px solid transparent;
+      cursor: pointer; transition: color 0.2s, border-color 0.2s;
+      letter-spacing: 0.03em;
+    }
+    .sec-btn:hover { color: var(--ink); }
+    .sec-btn.active { color: var(--rust); border-bottom-color: var(--rust); font-weight: 600; }
+
+    /* ─── PAGES ─── */
+    .page { display: none; }
+    .page.visible { display: block; }
+
+    .content-wrap { max-width: 1100px; margin: 0 auto; padding: 5rem 2rem; }
+
+    /* ─── ABOUT ─── */
+    .about-intro {
+      display: grid; grid-template-columns: 1fr 360px;
+      gap: 5rem; align-items: start; margin-bottom: 6rem;
+    }
+    .about-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 900;
+      color: var(--ink); line-height: 1.1; letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+    .about-text {
+      font-family: 'Lora', serif; font-size: 1.05rem;
+      color: #3d3530; line-height: 1.85; margin-bottom: 1.2rem;
+    }
+    .sidebar-block { border-left: 2px solid var(--line); padding-left: 1.5rem; margin-bottom: 2rem; }
+    .sidebar-label { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; }
+    .sidebar-block p { font-size: 0.88rem; color: var(--ink); line-height: 1.6; font-weight: 500; }
+    .sidebar-block p + p { margin-top: 0.2rem; }
+
+    .divider { border: none; border-top: 1px solid var(--line); margin: 4rem 0; }
+
+    .section-h {
+      font-family: 'Playfair Display', serif; font-weight: 900;
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem); color: var(--ink);
+      letter-spacing: -0.02em; margin-bottom: 0.5rem;
+    }
+    .section-sub { font-family: 'Lora', serif; font-style: italic; color: var(--muted); font-size: 0.95rem; margin-bottom: 3rem; }
+
+    /* SKILLS */
+    .skill-group { margin-bottom: 2.2rem; }
+    .skill-group-label { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.8rem; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+    .skill-tag {
+      font-size: 0.8rem; font-weight: 500; color: var(--ink);
+      background: white; border: 1px solid var(--line);
+      padding: 5px 14px; border-radius: 2px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .skill-tag:hover { border-color: var(--rust); color: var(--rust); }
+
+    /* EXPERIENCE */
+    .exp-item { display: grid; grid-template-columns: 160px 1fr; gap: 2rem; padding: 2rem 0; border-bottom: 1px solid var(--line); }
+    .exp-item:first-child { padding-top: 0; }
+    .exp-item:last-child  { border-bottom: none; }
+    .exp-date { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--muted); line-height: 1.6; padding-top: 4px; }
+    .exp-company { font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 1.05rem; color: var(--ink); }
+    .exp-role { font-family: 'Lora', serif; font-style: italic; font-size: 0.9rem; color: var(--rust); margin-bottom: 0.8rem; }
+    .exp-bullets { list-style: none; padding: 0; }
+    .exp-bullets li { font-size: 0.88rem; color: #4a4238; line-height: 1.7; padding-left: 1rem; position: relative; margin-bottom: 0.4rem; font-weight: 400; }
+    .exp-bullets li::before { content: '—'; position: absolute; left: 0; color: var(--rust); font-size: 0.75rem; top: 2px; }
+    .exp-stack { margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 6px; }
+    .stack-tag { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--muted); background: var(--warm); border: 1px solid var(--line); padding: 3px 10px; border-radius: 2px; }
+
+    /* BLOG */
+    .blog-item { display: flex; align-items: baseline; justify-content: space-between; gap: 2rem; padding: 1.4rem 0; border-bottom: 1px solid var(--line); text-decoration: none; transition: opacity 0.2s; }
+    .blog-item:hover { opacity: 0.6; }
+    .blog-item:first-child { padding-top: 0; }
+    .blog-tag { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; color: var(--rust); text-transform: uppercase; min-width: 130px; }
+    .blog-title { font-weight: 500; font-size: 0.92rem; color: var(--ink); flex: 1; line-height: 1.5; }
+    .blog-arrow { color: var(--muted); font-size: 0.75rem; }
+
+    /* ─── HONORS ─── */
+    .honors-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); margin-bottom: 5rem; }
+    .honor-cell { background: var(--paper); padding: 2rem; transition: background 0.2s; }
+    .honor-cell:hover { background: var(--warm); }
+    .honor-place { font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 900; color: var(--rust); line-height: 1; margin-bottom: 0.5rem; }
+    .honor-title { font-weight: 700; font-size: 0.95rem; color: var(--ink); margin-bottom: 0.3rem; }
+    .honor-where { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--muted); letter-spacing: 0.08em; margin-bottom: 0.8rem; }
+    .honor-desc { font-size: 0.83rem; color: #5c524a; line-height: 1.65; }
+
+    .pub-block { background: var(--deep); padding: 3rem; border-radius: 2px; margin-bottom: 2rem; }
+    .pub-status { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.14em; color: var(--rust-light); text-transform: uppercase; margin-bottom: 1rem; }
+    .pub-title { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: #f5f0e8; line-height: 1.45; margin-bottom: 0.8rem; }
+    .pub-authors { font-family: 'Lora', serif; font-style: italic; font-size: 0.85rem; color: rgba(245,240,232,0.45); margin-bottom: 1.2rem; }
+    .pub-body { font-size: 0.88rem; color: rgba(245,240,232,0.6); line-height: 1.75; }
+    .pub-body strong { color: var(--rust-light); font-weight: 600; }
+
+    .lead-item { padding: 1.8rem 0; border-bottom: 1px solid var(--line); }
+    .lead-item:last-child { border-bottom: none; }
+    .lead-title { font-weight: 700; font-size: 0.95rem; color: var(--ink); margin-bottom: 0.2rem; }
+    .lead-org { font-family: 'Lora', serif; font-style: italic; font-size: 0.85rem; color: var(--rust); margin-bottom: 0.5rem; }
+    .lead-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+
+    /* ─── PROJECTS ─── */
+    .proj-filter { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 3rem; }
+    .filter-btn {
+      font-size: 0.78rem; font-weight: 500; padding: 6px 16px;
+      border-radius: 2px; border: 1px solid var(--line); background: none;
+      color: var(--muted); cursor: pointer; transition: all 0.2s;
+    }
+    .filter-btn:hover { border-color: var(--ink); color: var(--ink); }
+    .filter-btn.on { background: var(--ink); border-color: var(--ink); color: white; }
+
+    .proj-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+    .proj-card { background: var(--paper); padding: 2rem; transition: background 0.2s; display: flex; flex-direction: column; }
+    .proj-card:hover { background: var(--warm); }
+    .proj-cat { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--rust); margin-bottom: 0.8rem; }
+    .proj-name { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.15rem; color: var(--ink); line-height: 1.3; margin-bottom: 0.75rem; }
+    .proj-desc { font-size: 0.84rem; color: #5c524a; line-height: 1.7; margin-bottom: 1.2rem; flex: 1; }
+    .proj-stack { font-family: 'DM Mono', monospace; font-size: 0.66rem; color: var(--muted); line-height: 1.8; border-top: 1px solid var(--line); padding-top: 1rem; }
+    .proj-links { display: flex; gap: 1rem; margin-top: 0.8rem; }
+    .proj-link { font-size: 0.78rem; color: var(--rust); text-decoration: none; font-weight: 600; transition: opacity 0.15s; }
+    .proj-link:hover { opacity: 0.6; }
+    .proj-badge { display: inline-block; font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; background: var(--rust); color: white; padding: 2px 8px; border-radius: 2px; margin-bottom: 0.8rem; }
+
+    /* ─── CONTACT MODAL ─── */
+    #contact-modal { display: none; position: fixed; inset: 0; background: rgba(28,25,22,0.75); backdrop-filter: blur(8px); z-index: 200; align-items: center; justify-content: center; padding: 2rem; }
+    #contact-modal.open { display: flex; }
+    .modal-box { background: var(--paper); max-width: 480px; width: 100%; border-radius: 2px; overflow: hidden; animation: slideUp 0.3s ease; }
+    @keyframes slideUp { from { transform:translateY(30px); opacity:0; } to { transform:none; opacity:1; } }
+    .modal-header { padding: 2rem 2rem 1rem; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; }
+    .modal-title { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; }
+    .modal-close { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 1rem; transition: color 0.2s; }
+    .modal-close:hover { color: var(--ink); }
+    .modal-body { padding: 1.5rem 2rem 2rem; }
+    .field { margin-bottom: 1.2rem; }
+    .field label { display: block; font-size: 0.78rem; font-weight: 600; color: var(--muted); margin-bottom: 0.4rem; letter-spacing: 0.06em; text-transform: uppercase; }
+    .field input, .field textarea { width: 100%; padding: 10px 14px; border: 1px solid var(--line); border-radius: 2px; background: var(--warm); font-family: 'Manrope', sans-serif; font-size: 0.88rem; color: var(--ink); outline: none; transition: border-color 0.2s; }
+    .field input:focus, .field textarea:focus { border-color: var(--rust); }
+    .field textarea { resize: vertical; min-height: 120px; }
+
+    /* ─── FOOTER ─── */
+    footer { background: var(--deep); padding: 4rem 2rem; text-align: center; }
+    .foot-name { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 900; color: #f5f0e8; margin-bottom: 0.5rem; }
+    .foot-tagline { font-family: 'Lora', serif; font-style: italic; color: rgba(245,240,232,0.35); font-size: 0.9rem; margin-bottom: 2rem; }
+    .foot-links { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 2rem; }
+    .foot-links a { color: rgba(245,240,232,0.4); font-size: 1rem; transition: color 0.2s; }
+    .foot-links a:hover { color: var(--rust-light); }
+    .foot-copy { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; color: rgba(245,240,232,0.2); text-transform: uppercase; }
+
+    /* ─── REVEAL ─── */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+    .reveal.d1 { transition-delay: 0.1s; }
+    .reveal.d2 { transition-delay: 0.2s; }
+    .reveal.d3 { transition-delay: 0.3s; }
+    .reveal.d4 { transition-delay: 0.4s; }
+
+    /* ─── MOBILE ─── */
+    #mob-nav-btn { display: none; background: none; border: none; color: var(--ink); font-size: 1.1rem; cursor: pointer; }
+    #mob-menu { display: none; position: fixed; inset: 0; background: var(--paper); z-index: 150; flex-direction: column; align-items: center; justify-content: center; gap: 2rem; }
+    #mob-menu.open { display: flex; }
+    #mob-menu .mob-link { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; background: none; border: none; color: var(--ink); cursor: pointer; }
+    #mob-menu-close { position: absolute; top: 1.2rem; right: 1.5rem; background: none; border: none; font-size: 1.2rem; color: var(--muted); cursor: pointer; }
+
+    @media (max-width: 900px) { .about-intro { grid-template-columns: 1fr; } .hero-photo { display: none; } .exp-item { grid-template-columns: 1fr; gap: 0.5rem; } }
+    @media (max-width: 640px) { .nav-links, .nav-socials { display: none; } #mob-nav-btn { display: block; } .honors-grid { grid-template-columns: 1fr; } .proj-grid { grid-template-columns: 1fr; } .hero-numbers { gap: 2rem; } }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="site-nav">
+  <span class="nav-logo">Musoye.</span>
+  <div class="nav-links">
+    <button class="nav-tab active" data-sec="about">About</button>
+    <button class="nav-tab" data-sec="honors">Honors</button>
+    <button class="nav-tab" data-sec="projects">Projects</button>
+  </div>
+  <div class="nav-socials">
+    <a href="https://github.com/musoye" target="_blank"><i class="fab fa-github"></i></a>
+    <a href="https://linkedin.com/in/musoye" target="_blank"><i class="fab fa-linkedin"></i></a>
+    <a href="https://twitter.com/musoye1" target="_blank"><i class="fab fa-twitter"></i></a>
+    <a href="https://medium.com/@musoye1" target="_blank"><i class="fab fa-medium"></i></a>
+  </div>
+  <button id="mob-nav-btn"><i class="fas fa-bars"></i></button>
+</nav>
+
+<!-- MOB MENU -->
+<div id="mob-menu">
+  <button id="mob-menu-close"><i class="fas fa-times"></i></button>
+  <button class="mob-link" onclick="switchSection('about');closeMob()">About</button>
+  <button class="mob-link" onclick="switchSection('honors');closeMob()">Honors</button>
+  <button class="mob-link" onclick="switchSection('projects');closeMob()">Projects</button>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <p class="hero-eyebrow">Software Engineer &amp; ML Explorer — Akure, Nigeria</p>
+    <h1 class="hero-name">Oyebamiji<br><em>Mustapha.</em></h1>
+    <p class="hero-role">Building systems that scale across continents.</p>
+    <p class="hero-bio">I write backend software and train neural networks. Currently studying Computer Engineering at FUTA and shipping features that reach schools across 10 countries. I care about clean architecture, real performance numbers, and code that other humans can read.</p>
+    <div class="hero-actions">
+      <button class="btn-rust" id="contact-btn"><i class="fas fa-paper-plane"></i> Say hello</button>
+      <a class="btn-ghost" href="./images/mustapha_oyebamiji_combined.pdf" target="_blank"><i class="fas fa-file"></i> Read my CV</a>
+    </div>
+    <div class="hero-numbers">
+      <!-- <div><span class="hero-num-val">60+</span><span class="hero-num-label">Schools served</span></div> -->
+      <div><span class="hero-num-val">5</span><span class="hero-num-label">Countries</span></div>
+      <div><span class="hero-num-val">3</span><span class="hero-num-label">Hackathon wins</span></div>
+       <div>
+    <span class="hero-num-val">4+</span>
+    <span class="hero-num-label">Backend Frameworks</span>
+  </div>
+
+  <div>
+    <span class="hero-num-val">3</span>
+    <span class="hero-num-label">Industry Roles</span>
+  </div>
+      <!-- <div><span class="hero-num-val">4.65</span><span class="hero-num-label">GPA / 5.00</span></div> -->
+    </div>
+  </div>
+  <div class="hero-photo">
+    <img src="./images/b.jpg" alt="Mustapha Oyebamiji" />
+    <!-- <img src="./images/musoye.jpg" alt="Mustapha Oyebamiji" /> -->
+  </div>
+</section>
+
+<!-- SECTION BAR -->
+<div id="section-bar">
+  <div class="section-bar-inner">
+    <button class="sec-btn active" data-sec="about">About</button>
+    <button class="sec-btn" data-sec="honors">Honors &amp; Achievements</button>
+    <button class="sec-btn" data-sec="projects">Projects &amp; Work</button>
+  </div>
+</div>
+
+<!-- ══════ PAGE: ABOUT ══════ -->
+<div id="page-about" class="page visible" style="background:var(--paper)">
+  <div class="content-wrap">
+
+    <div class="about-intro reveal">
+      <div>
+        <h2 class="about-heading">A bit about<br>who I am.</h2>
+        <p class="about-text">I'm Oyebamiji Mustapha Oyetunde — people call me Musoye. I'm a fourth-year Computer Engineering student at Federal University of Technology, Akure, and I've been writing software seriously since 2022.</p>
+        <p class="about-text">My work lives mostly in the backend — distributed systems, microservices, cloud infrastructure, and the plumbing that keeps large platforms running. Lately I've been building a federated learning framework for medical imaging, which has been one of the more interesting problems I've worked on.</p>
+        <p class="about-text">Outside code, I lead bootcamps at the Google Developer Student Club on campus, tutored thermodynamics and discrete maths for peers, and try to write the occasional technical article when I have something worth saying.</p>
       </div>
-
-      <!-- Mobile Menu -->
-      <div id="mobile-menu" class="md:hidden section-hidden bg-primary">
-        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-          <a
-            class="nav-link text-gray-300 hover:text-white block px-3 py-2 text-base font-nunito"
-            onclick="showAbout(event)"
-            >About</a
-          >
-          <a
-            class="nav-link text-gray-300 hover:text-white block px-3 py-2 text-base font-nunito change"
-            onclick="showProjects(event)"
-            >Projects</a
-          >
-          <div class="flex space-x-4 px-3 py-2">
-            <a
-              href="https://twitter.com/musoye1"
-              target="_blank"
-              class="text-gray-300 hover:text-white"
-            >
-              <i class="fab fa-twitter"></i>
-            </a>
-            <a
-              href="https://linkedin.com/in/musoye"
-              target="_blank"
-              class="text-gray-300 hover:text-white"
-            >
-              <i class="fab fa-linkedin"></i>
-            </a>
-            <a
-              href="https://github.com/musoye"
-              target="_blank"
-              class="text-gray-300 hover:text-white"
-            >
-              <i class="fab fa-github"></i>
-            </a>
-            <a
-            href="https://medium.com/@musoye1"
-            target="_blank"
-            class="text-gray-300 hover:text-white"
-          >
-            <i class="fab fa-medium"></i>
-          </a>
-          </div>
+      <div>
+        <div class="sidebar-block">
+          <p class="sidebar-label">Currently</p>
+          <p>FullStack Engineer @ SchoolTry, Switzerland</p>
+          <p>Backend Lead @ Nexora (Contract)</p>
         </div>
-      </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section
-      class="hero-bg min-h-screen flex items-center justify-center pt-16"
-    >
-      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div class="mb-8">
-          <p
-            class="text-secondary font-opensans text-lg md:text-xl font-bold tracking-wider mb-4"
-          ></p>
+        <div class="sidebar-block">
+          <p class="sidebar-label">Education</p>
+          <p>B.Eng. Computer Engineering</p>
+          <p>FUTA </p>  <!-- <i>GPA 4.65/5.00 · Dean's List</i> -->
+          <p>Expected Graduation: 2027</p>
         </div>
-
-        <div
-          class="flex flex-col md:flex-row items-center justify-center space-y-6 md:space-y-0 md:space-x-12 mt-4 mb-8"
-        >
-          <div class="relative">
-            <img
-              src="./images/musoye.jpg"
-              alt="Oyebamiji Mustapha"
-              class="w-48 h-48 md:w-56 md:h-56 rounded-full border-4 border-accent shadow-2xl transform -rotate-3 hover:rotate-0 transition-transform duration-300"
-            />
-          </div>
-          <div class="text-white">
-            <h1 class="text-4xl md:text-6xl font-outfit font-bold mb-4">
-              I am <span class="gradient-text">MUSOYE</span>
-            </h1>
-          </div>
+        <div class="sidebar-block">
+          <p class="sidebar-label">Email</p>
+          <p><a href="mailto:oyebamijimustapha44@gmail.com" style="color:var(--rust)">oyebamijimustapha44@gmail.com</a></p>
         </div>
-
-        <div class="text-white text-center mb-8">
-          <p class="text-xl md:text-2xl font-nunito mb-4">
-            Software Engineer
-            <span class="text-accent mx-2">•</span>
-            Machine Learning Engineer
-          </p>
-          <p
-            class="text-lg md:text-xl font-nunito max-w-3xl mx-auto leading-relaxed"
-          >
-            I have a passion for creating intuitive and engaging applications,
-            with a focus on
-            <span class="text-accent">simplicity</span> and
-            <span class="text-accent">user experience</span>. Currently
-            exploring ML/AI as a side venture while mastering full-stack
-            development.
-          </p>
-        </div>
-
-        <button
-          id="contact-btn"
-          class="bg-accent hover:bg-orange-600 text-white px-8 py-3 rounded-lg font-outfit font-medium transition-colors shadow-lg mb-4"
-        >
-          Get in touch <i class="fas fa-envelope ml-2"></i>
-        </button>
-      </div>
-    </section>
-
-    <!-- Toggle Section -->
-    <section class="bg-gray-100 py-8">
-      <div class="max-w-4xl mx-auto px-4">
-        <div class="flex justify-center">
-          <div class="bg-white rounded-full p-1 shadow-lg">
-            <button
-              id="about-btn"
-              class="px-6 py-2 rounded-full bg-primary text-white font-outfit transition-all"
-            >
-              About
-            </button>
-            <button
-              id="projects-btn"
-              class="px-6 py-2 rounded-full text-primary font-outfit transition-all"
-            >
-              Projects
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about-section" class="bg-gray-50 py-16">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="mb-12">
-          <h2 class="text-3xl font-outfit font-bold text-gray-900 mb-6">
-            Who am I?
-          </h2>
-          <p
-            class="text-lg font-nunito text-gray-700 leading-relaxed max-w-4xl"
-          >
-            I am Oyebamiji Mustapha Oyetunde, a Software Engineer and Machine
-            Learning enthusiast. I'm a purpose-driven individual who is quick to
-            adapt to any learning environment, dedicated to improving the
-            digital world through innovative solutions. Currently studying
-            Computer Engineering at Federal University of Technology, Akure, and
-            serving as Skill Development Lead at Google Developer Group on
-            Campus.
-          </p>
-        </div>
-
-        <!-- Skills Section -->
-        <div class="mb-12">
-          <h3 class="text-2xl font-outfit font-bold text-gray-900 mb-8">
-            Skills & Technologies
-          </h3>
-
-          <!-- Backend Development -->
-          <div class="mb-10">
-            <h4 class="text-xl font-outfit font-semibold text-gray-800 mb-6">
-              Backend Development
-            </h4>
-            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
-              <div
-                class="skill-icon text-center p-4 bg-white rounded-lg shadow-md card-hover"
-              >
-                <i class="fab fa-python text-4xl text-blue-500 mb-2"></i>
-                <p class="font-nunito text-sm font-medium">Python</p>
-              </div>
-              <div
-                class="skill-icon text-center p-4 bg-white rounded-lg shadow-md card-hover"
-              >
-                <i class="fab fa-node-js text-4xl text-green-500 mb-2"></i>
-                <p class="font-nunito text-sm font-medium">Node.js</p>
-              </div>
-              <div
-                class="skill-icon text-center p-4 bg-white rounded-lg shadow-md card-hover"
-              >
-                <i class="fab fa-js-square text-4xl text-yellow-500 mb-2"></i>
-                <p class="font-nunito text-sm font-medium">JavaScript</p>
-              </div>
-              <div
-                class="skill-icon text-center p-4 bg-white rounded-lg shadow-md card-hover"
-              >
-                <i class="fab fa-golang text-4xl text-blue-400 mb-2"></i>
-                <p class="font-nunito text-sm font-medium">Golang</p>
-              </div>
-              <div
-                class="skill-icon text-center p-4 bg-white rounded-lg shadow-md card-hover"
-              >
-                <i class="fab fa-php text-4xl text-indigo-500 mb-2"></i>
-                <p class="font-nunito text-sm font-medium">PHP</p>
-              </div>
-
-              <div
-                class="skill-icon text-center p-4 bg-white rounded-lg shadow-md card-hover"
-              >
-                <i class="fas fa-flask text-4xl text-gray-700 mb-2"></i>
-                <p class="font-nunito text-sm font-medium">Flask</p>
-              </div>
-
-              <div
-                class="skill-icon text-center p-4 bg-white rounded-lg shadow-md card-hover"
-              >
-                <i class="fas fa-leaf text-4xl text-green-800 mb-2"></i>
-                <p class="font-nunito text-sm font-medium">Django</p>
-              </div>
-
-              <div
-                class="skill-icon text-center p-4 bg-white rounded-lg shadow-md card-hover"
-              >
-                <i class="fab fa-laravel text-4xl text-red-500 mb-2"></i>
-                <p class="font-nunito text-sm font-medium">Laravel</p>
-              </div>
-
-              <div
-                class="skill-icon text-center p-4 bg-white rounded-lg shadow-md card-hover"
-              >
-                <i class="fas fa-database text-4xl text-gray-600 mb-2"></i>
-                <p class="font-nunito text-sm font-medium">SQL</p>
-              </div>
-              <div
-                class="skill-icon text-center p-4 bg-white rounded-lg shadow-md card-hover"
-              >
-                <i class="fas fa-leaf text-4xl text-green-600 mb-2"></i>
-                <p class="font-nunito text-sm font-medium">MongoDB</p>
-              </div>
-              <div
-                class="skill-icon text-center p-4 bg-white rounded-lg shadow-md card-hover"
-              >
-                <i class="fas fa-database text-4xl text-yellow-600 mb-2"></i>
-                <p class="font-nunito text-sm font-medium">DynamoDB</p>
-              </div>
-              <div
-                class="skill-icon text-center p-4 bg-white rounded-lg shadow-md card-hover"
-              >
-                <i class="fas fa-search text-4xl text-blue-500 mb-2"></i>
-                <p class="font-nunito text-sm font-medium">OpenSearch</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Frontend Development -->
-          <div class="mb-10">
-            <h4 class="text-xl font-outfit font-semibold text-gray-800 mb-6">
-              Frontend Development
-            </h4>
-            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
-              <div
-                class="skill-icon text-center p-4 bg-white rounded-lg shadow-md card-hover"
-              >
-                <i class="fab fa-html5 text-4xl text-orange-500 mb-2"></i>
-                <p class="font-nunito text-sm font-medium">HTML5</p>
-              </div>
-              <div
-                class="skill-icon text-center p-4 bg-white rounded-lg shadow-md card-hover"
-              >
-                <i class="fab fa-css3-alt text-4xl text-blue-500 mb-2"></i>
-                <p class="font-nunito text-sm font-medium">CSS3</p>
-              </div>
-              <div
-                class="skill-icon text-center p-4 bg-white rounded-lg shadow-md card-hover"
-              >
-                <i class="fab fa-js-square text-4xl text-yellow-500 mb-2"></i>
-                <p class="font-nunito text-sm font-medium">JavaScript</p>
-              </div>
-              <div
-                class="skill-icon text-center p-4 bg-white rounded-lg shadow-md card-hover"
-              >
-                <i class="fab fa-vuejs text-4xl text-green-400 mb-2"></i>
-                <p class="font-nunito text-sm font-medium">Vue.js</p>
-              </div>
-              <div
-                class="skill-icon text-center p-4 bg-white rounded-lg shadow-md card-hover"
-              >
-                <i class="fab fa-react text-4xl text-blue-400 mb-2"></i>
-                <p class="font-nunito text-sm font-medium">React</p>
-              </div>
-              <div
-                class="skill-icon text-center p-4 bg-white rounded-lg shadow-md card-hover"
-              >
-                <i class="fab fa-bootstrap text-4xl text-purple-500 mb-2"></i>
-                <p class="font-nunito text-sm font-medium">Bootstrap</p>
-              </div>
-              <div
-                class="skill-icon text-center p-4 bg-white rounded-lg shadow-md card-hover"
-              >
-                <i class="fas fa-wind text-4xl text-sky-400 mb-2"></i>
-                <p class="font-nunito text-sm font-medium">Tailwind CSS</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- ML/AI & Tools -->
-          <div class="mb-10">
-            <h4 class="text-xl font-outfit font-semibold text-gray-800 mb-6">
-              ML/AI & DevOps
-            </h4>
-            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
-              <div
-                class="skill-icon text-center p-4 bg-white rounded-lg shadow-md card-hover"
-              >
-                <i class="fas fa-brain text-4xl text-purple-500 mb-2"></i>
-                <p class="font-nunito text-sm font-medium">PyTorch</p>
-              </div>
-              <div
-                class="skill-icon text-center p-4 bg-white rounded-lg shadow-md card-hover"
-              >
-                <i class="fas fa-robot text-4xl text-orange-500 mb-2"></i>
-                <p class="font-nunito text-sm font-medium">TensorFlow</p>
-              </div>
-              <div
-                class="skill-icon text-center p-4 bg-white rounded-lg shadow-md card-hover"
-              >
-                <i class="fab fa-docker text-4xl text-blue-500 mb-2"></i>
-                <p class="font-nunito text-sm font-medium">Docker</p>
-              </div>
-              <div
-                class="skill-icon text-center p-4 bg-white rounded-lg shadow-md card-hover"
-              >
-                <i class="fab fa-linux text-4xl text-black mb-2"></i>
-                <p class="font-nunito text-sm font-medium">Linux</p>
-              </div>
-              <div
-                class="skill-icon text-center p-4 bg-white rounded-lg shadow-md card-hover"
-              >
-                <i class="fab fa-git-alt text-4xl text-red-500 mb-2"></i>
-                <p class="font-nunito text-sm font-medium">Git</p>
-              </div>
-              <div
-                class="skill-icon text-center p-4 bg-white rounded-lg shadow-md card-hover"
-              >
-                <i class="fas fa-server text-4xl text-gray-600 mb-2"></i>
-                <p class="font-nunito text-sm font-medium">Nginx</p>
-              </div>
-              <div
-                class="skill-icon text-center p-4 bg-white rounded-lg shadow-md card-hover"
-              >
-                <i class="fas fa-c text-4xl text-gray-800 mb-2"></i>
-                <p class="font-nunito text-sm font-medium">C</p>
-              </div>
-              <div
-                class="skill-icon text-center p-4 bg-white rounded-lg shadow-md card-hover"
-              >
-                <i class="fas fa-code text-4xl text-indigo-700 mb-2"></i>
-                <p class="font-nunito text-sm font-medium">C++</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Blog Posts Section -->
-        <div class="mb-12">
-          <h3 class="text-2xl font-outfit font-bold text-gray-900 mb-8">
-            Featured Blog Posts
-          </h3>
-          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <!-- Blog Post 1 -->
-            <div
-              class="bg-white rounded-xl shadow-lg overflow-hidden card-hover"
-            >
-              <div class="p-6">
-                <div class="flex items-center mb-4">
-                  <div
-                    class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center"
-                  >
-                    <i class="fas fa-brain text-white text-xl"></i>
-                  </div>
-                  <div class="ml-4">
-                    <span
-                      class="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded-full font-medium"
-                      >Machine Learning</span
-                    >
-                  </div>
-                </div>
-                <h4 class="text-lg font-outfit font-bold text-gray-900 mb-3">
-                  Brain Tumor Detection using MRI Scanned Images
-                </h4>
-                <p class="text-gray-600 font-nunito text-sm mb-4">
-                  Deep dive into medical AI: Building CNN models to classify
-                  brain tumors from MRI scans with high accuracy.
-                </p>
-                <a
-                  href="https://medium.com/@musoye1/brain-tumor-classifier-based-on-brain-mri-images-b537e4d82d8d"
-                  class="text-accent hover:underline font-medium inline-flex items-center"
-                >
-                  Read Article <i class="fas fa-arrow-right ml-1"></i>
-                </a>
-              </div>
-            </div>
-
-            <!-- Blog Post 2 -->
-            <div
-              class="bg-white rounded-xl shadow-lg overflow-hidden card-hover"
-            >
-              <div class="p-6">
-                <div class="flex items-center mb-4">
-                  <div
-                    class="w-12 h-12 bg-gradient-to-br from-blue-500 to-teal-500 rounded-lg flex items-center justify-center"
-                  >
-                    <i class="fab fa-linux text-white text-xl"></i>
-                  </div>
-                  <div class="ml-4">
-                    <span
-                      class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full font-medium"
-                      >System Administration</span
-                    >
-                  </div>
-                </div>
-                <h4 class="text-lg font-outfit font-bold text-gray-900 mb-3">
-                  Processes on Linux
-                </h4>
-                <p class="text-gray-600 font-nunito text-sm mb-4">
-                  Understanding Linux process management, from creation to
-                  termination, and everything in between.
-                </p>
-                <a
-                  href="https://musoye.hashnode.dev/processes-on-linux"
-                  class="text-accent hover:underline font-medium inline-flex items-center"
-                >
-                  Read Article <i class="fas fa-arrow-right ml-1"></i>
-                </a>
-              </div>
-            </div>
-
-            <!-- Blog Post 3 -->
-            <div
-              class="bg-white rounded-xl shadow-lg overflow-hidden card-hover"
-            >
-              <div class="p-6">
-                <div class="flex items-center mb-4">
-                  <div
-                    class="w-12 h-12 bg-gradient-to-br from-green-500 to-blue-500 rounded-lg flex items-center justify-center"
-                  >
-                    <i class="fas fa-globe text-white text-xl"></i>
-                  </div>
-                  <div class="ml-4">
-                    <span
-                      class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full font-medium"
-                      >Web Development</span
-                    >
-                  </div>
-                </div>
-                <h4 class="text-lg font-outfit font-bold text-gray-900 mb-3">
-                  What Happens When You Press Google.com and Press Enter
-                </h4>
-                <p class="text-gray-600 font-nunito text-sm mb-4">
-                  A comprehensive breakdown of the web request journey from DNS
-                  lookup to page rendering.
-                </p>
-                <a
-                  href="https://medium.com/%40musoye1/what-happens-when-you-type-https-www-google-com-in-your-browser-and-press-enter-6b843a762dfa"
-                  class="text-accent hover:underline font-medium inline-flex items-center"
-                >
-                  Read Article <i class="fas fa-arrow-right ml-1"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Resume Button -->
-        <div class="text-center mt-12">
-          <a
-            href="#"
-            class="bg-accent hover:bg-orange-600 text-white px-8 py-3 rounded-lg font-outfit font-medium transition-colors shadow-lg inline-block"
-            onclick="window.open('./images/mustapha_oyebamiji_combined.pdf', '_blank')"
-          >
-            View Resume <i class="fas fa-download ml-2"></i>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects-section" class="bg-gray-50 py-16 section-hidden">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2
-          class="text-3xl font-outfit font-bold text-gray-900 mb-12 text-center"
-        >
-          Featured Projects
-        </h2>
-
-        <!-- Backend Projects Section -->
-        <div class="mb-16">
-          <h3
-            class="text-2xl font-outfit font-bold text-gray-800 mb-8 text-center"
-          >
-            Backend Development
-          </h3>
-
-          <div class="grid gap-8">
-            <!-- Peeriva - Backend Engineer -->
-            <div
-              class="bg-white rounded-xl shadow-lg overflow-hidden card-hover"
-            >
-              <div class="md:flex">
-                <div class="md:w-1/3">
-                  <div
-                    class="h-48 md:h-full bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center"
-                  >
-                    <i class="fas fa-server text-white text-6xl"></i>
-                  </div>
-                </div>
-                <div class="md:w-2/3 p-8">
-                  <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-2xl font-outfit font-bold text-gray-900">
-                      Backend Engineer
-                    </h3>
-                    <span
-                      class="text-sm bg-blue-100 text-blue-800 px-3 py-1 rounded-full font-medium"
-                      >Current</span
-                    >
-                  </div>
-                  <p class="text-lg font-semibold text-gray-700 mb-2">
-                    Peeriva
-                  </p>
-                  <p class="text-sm text-gray-500 mb-4">
-                    January 2025 – April 2025
-                  </p>
-                  <p class="text-gray-600 font-nunito mb-4">
-                    Built scalable microservices including notification system
-                    with Redis and Amazon SQS, user activity analytics with
-                    DynamoDB, and comprehensive search architecture with AWS
-                    OpenSearch. Optimized performance with caching and
-                    distributed processing.
-                  </p>
-                  <p class="text-sm text-gray-500 font-nunito mb-4">
-                    <strong>Built with:</strong> Django, Redis, PostgreSQL, AWS
-                    DynamoDB, AWS OpenSearch, Amazon SQS
-                  </p>
-                  <div class="flex space-x-4">
-                    <a
-                      href="https://www.linkedin.com/company/peeriva"
-                      class="text-accent hover:underline font-medium"
-                      >View Details</a
-                    >
-                    <a
-                      href="https://www.linkedin.com/company/peeriva"
-                      class="text-accent hover:underline font-medium inline-flex items-center"
-                    >
-                      Learn More <i class="fas fa-arrow-right ml-1"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- NGREEN LOGISTICS - Backend Developer -->
-            <div
-              class="bg-white rounded-xl shadow-lg overflow-hidden card-hover"
-            >
-              <div class="md:flex">
-                <div class="md:w-1/3">
-                  <div
-                    class="h-48 md:h-full bg-gradient-to-br from-green-500 to-teal-500 flex items-center justify-center"
-                  >
-                    <i class="fas fa-truck text-white text-6xl"></i>
-                  </div>
-                </div>
-                <div class="md:w-2/3 p-8">
-                  <h3 class="text-2xl font-outfit font-bold text-gray-900 mb-4">
-                    Backend Developer
-                  </h3>
-                  <p class="text-lg font-semibold text-gray-700 mb-2">
-                    NGREEN LOGISTICS
-                  </p>
-                  <p class="text-gray-600 font-nunito mb-4">
-                    Designed and deployed logistics application backend using
-                    MERN stack. Built RESTful APIs for user authentication,
-                    shipment tracking, and order management with optimized
-                    database queries for large datasets.
-                  </p>
-                  <p class="text-sm text-gray-500 font-nunito mb-4">
-                    <strong>Built with:</strong> MongoDB, Express.js, Node.js,
-                    JWT Authentication
-                  </p>
-                  <div class="flex space-x-4">
-                    <a
-                      href="#"
-                      onclick="alert('Access denied. This is a private project and the source code is restricted.')"
-                      class="text-accent hover:underline font-medium"
-                      >GitHub Repo</a
-                    >
-                    <a
-                      href="#"
-                      onclick="alert('Access denied. This is a private project and the source code is restricted.')"
-                      class="text-accent hover:underline font-medium inline-flex items-center"
-                    >
-                      View Project <i class="fas fa-arrow-right ml-1"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- APIENG - Backend Developer Intern -->
-            <div
-              class="bg-white rounded-xl shadow-lg overflow-hidden card-hover"
-            >
-              <div class="md:flex">
-                <div class="md:w-1/3">
-                  <div
-                    class="h-48 md:h-full bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center"
-                  >
-                    <i class="fas fa-chart-line text-white text-6xl"></i>
-                  </div>
-                </div>
-                <div class="md:w-2/3 p-8">
-                  <h3 class="text-2xl font-outfit font-bold text-gray-900 mb-4">
-                    Backend Developer Intern
-                  </h3>
-                  <p class="text-lg font-semibold text-gray-700 mb-2">APIENG</p>
-                  <p class="text-gray-600 font-nunito mb-4">
-                    Contributed to API monitoring system development measuring
-                    energy consumption of endpoints. Collaborated on scalable
-                    microservices architecture and API design using Go (Golang).
-                  </p>
-                  <p class="text-sm text-gray-500 font-nunito mb-4">
-                    <strong>Built with:</strong> Go (Golang), Microservices
-                    Architecture
-                  </p>
-                  <div class="flex space-x-4">
-                    <a
-                      href="#"
-                      onclick="alert('Access denied. This is a private project and the source code is restricted.')"
-                      class="text-accent hover:underline font-medium"
-                      >Learn More</a
-                    >
-                    <a
-                      href="#"
-                      onclick="alert('Access denied. This is a private project and the source code is restricted.')"
-                      class="text-accent hover:underline font-medium inline-flex items-center"
-                    >
-                      View Details <i class="fas fa-arrow-right ml-1"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- HelpBot - ALX SE Final Project -->
-            <div
-              class="bg-white rounded-xl shadow-lg overflow-hidden card-hover"
-            >
-              <div class="md:flex">
-                <div class="md:w-1/3">
-                  <div
-                    class="h-48 md:h-full bg-gradient-to-br from-purple-500 to-indigo-500 flex items-center justify-center"
-                  >
-                    <i class="fas fa-robot text-white text-6xl"></i>
-                  </div>
-                </div>
-                <div class="md:w-2/3 p-8">
-                  <h3 class="text-2xl font-outfit font-bold text-gray-900 mb-4">
-                    HelpBot - AI Document Assistant
-                  </h3>
-                  <p class="text-lg font-semibold text-gray-700 mb-2">
-                    ALX SE Final Project
-                  </p>
-                  <p class="text-gray-600 font-nunito mb-4">
-                    Developed AI-powered application backend that analyzes PDF
-                    documents and answers user queries. Implemented PDF parsing,
-                    natural language processing with OpenAI API, and efficient
-                    query-response handling.
-                  </p>
-                  <p class="text-sm text-gray-500 font-nunito mb-4">
-                    <strong>Built with:</strong> Node.js, OpenAI API, PDF
-                    Processing, Vite Frontend Integration
-                  </p>
-                  <div class="flex space-x-4">
-                    <a
-                      href="https://github.com/Musoye/helpbot"
-                      class="text-accent hover:underline font-medium"
-                      >GitHub Repo</a
-                    >
-                    <a
-                      href="https://github.com/Musoye/helpbot"
-                      class="text-accent hover:underline font-medium"
-                      >Live Demo</a
-                    >
-                    <a
-                      href="#"
-                      class="text-accent hover:underline font-medium inline-flex items-center"
-                    >
-                      View Project <i class="fas fa-arrow-right ml-1"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Time Minder - ALX SE Project -->
-            <div
-              class="bg-white rounded-xl shadow-lg overflow-hidden card-hover"
-            >
-              <div class="md:flex">
-                <div class="md:w-1/3">
-                  <div
-                    class="h-48 md:h-full bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center"
-                  >
-                    <i class="fas fa-clock text-white text-6xl"></i>
-                  </div>
-                </div>
-                <div class="md:w-2/3 p-8">
-                  <h3 class="text-2xl font-outfit font-bold text-gray-900 mb-4">
-                    Time Minder - Project Management
-                  </h3>
-                  <p class="text-lg font-semibold text-gray-700 mb-2">
-                    ALX SE Program
-                  </p>
-                  <p class="text-gray-600 font-nunito mb-4">
-                    Full-stack project management software for scheduling and
-                    task management. Built with Flask backend, MySQL database,
-                    and responsive frontend. Deployed with Nginx and HAProxy for
-                    load balancing.
-                  </p>
-                  <p class="text-sm text-gray-500 font-nunito mb-4">
-                    <strong>Built with:</strong> Flask, MySQL,
-                    HTML/CSS/JavaScript, Nginx, HAProxy
-                  </p>
-                  <div class="flex space-x-4">
-                    <a href="#" class="text-accent hover:underline font-medium"
-                      >GitHub Repo</a
-                    >
-                    <a
-                      href="https://github.com/Musoye/Time-Minder"
-                      class="text-accent hover:underline font-medium"
-                      >Documentation</a
-                    >
-                    <a
-                      href="https://github.com/Musoye/Time-Minder"
-                      class="text-accent hover:underline font-medium inline-flex items-center"
-                    >
-                      View Project <i class="fas fa-arrow-right ml-1"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Machine Learning Projects Section -->
-        <div>
-          <h3
-            class="text-2xl font-outfit font-bold text-gray-800 mb-8 text-center"
-          >
-            Machine Learning & AI
-          </h3>
-
-          <div class="grid gap-8">
-            <!-- Brain Tumor Detection -->
-            <div
-              class="bg-white rounded-xl shadow-lg overflow-hidden card-hover"
-            >
-              <div class="md:flex">
-                <div class="md:w-1/3">
-                  <div
-                    class="h-48 md:h-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center"
-                  >
-                    <i class="fas fa-brain text-white text-6xl"></i>
-                  </div>
-                </div>
-                <div class="md:w-2/3 p-8">
-                  <h3 class="text-2xl font-outfit font-bold text-gray-900 mb-4">
-                    Brain Tumor Detection
-                  </h3>
-                  <p class="text-gray-600 font-nunito mb-4">
-                    Built a custom CNN and fine-tuned ResNet model to classify
-                    brain tumors from MRI images. Focused on image
-                    preprocessing, model evaluation, and created a real-time web
-                    app for predictions.
-                  </p>
-                  <p class="text-sm text-gray-500 font-nunito mb-4">
-                    <strong>Built with:</strong> Python, PyTorch, TensorFlow,
-                    OpenCV, Flask
-                  </p>
-                  <div class="flex space-x-4">
-                    <a
-                      href="https://github.com/Musoye/BrainTumorDetection"
-                      class="text-accent hover:underline font-medium"
-                      >GitHub Repo</a
-                    >
-                    <a
-                      href="https://medium.com/@musoye1/brain-tumor-classifier-based-on-brain-mri-images-b537e4d82d8d"
-                      class="text-accent hover:underline font-medium"
-                      >Medium Article</a
-                    >
-                    <a
-                      href="https://github.com/Musoye/BrainTumorDetection"
-                      class="text-accent hover:underline font-medium inline-flex items-center"
-                    >
-                      View Project <i class="fas fa-arrow-right ml-1"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- GPT-2 Fine-tuning -->
-            <div
-              class="bg-white rounded-xl shadow-lg overflow-hidden card-hover"
-            >
-              <div class="md:flex">
-                <div class="md:w-1/3">
-                  <div
-                    class="h-48 md:h-full bg-gradient-to-br from-blue-500 to-teal-500 flex items-center justify-center"
-                  >
-                    <i class="fas fa-comments text-white text-6xl"></i>
-                  </div>
-                </div>
-                <div class="md:w-2/3 p-8">
-                  <h3 class="text-2xl font-outfit font-bold text-gray-900 mb-4">
-                    Fine-tuning GPT-2 for Sentiment Analysis
-                  </h3>
-                  <p class="text-gray-600 font-nunito mb-4">
-                    Rebuilt GPT-2 architecture and trained it on custom dataset
-                    for sentiment classification. Worked on tokenizer setup,
-                    model fine-tuning, and adapting LLM for downstream tasks.
-                  </p>
-                  <p class="text-sm text-gray-500 font-nunito mb-4">
-                    <strong>Built with:</strong> Python, PyTorch, Transformers
-                  </p>
-                  <div class="flex space-x-4">
-                    <a
-                      href="https://github.com/Musoye/LLM"
-                      class="text-accent hover:underline font-medium"
-                      >GitHub Repo</a
-                    >
-                    <a
-                      href="https://github.com/Musoye/LLM"
-                      class="text-accent hover:underline font-medium inline-flex items-center"
-                    >
-                      View Project <i class="fas fa-arrow-right ml-1"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Fraud Detection -->
-            <div
-              class="bg-white rounded-xl shadow-lg overflow-hidden card-hover"
-            >
-              <div class="md:flex">
-                <div class="md:w-1/3">
-                  <div
-                    class="h-48 md:h-full bg-gradient-to-br from-red-500 to-orange-500 flex items-center justify-center"
-                  >
-                    <i class="fas fa-shield-alt text-white text-6xl"></i>
-                  </div>
-                </div>
-                <div class="md:w-2/3 p-8">
-                  <h3 class="text-2xl font-outfit font-bold text-gray-900 mb-4">
-                    Fraud Detection System
-                  </h3>
-                  <p class="text-gray-600 font-nunito mb-4">
-                    Developed ML model to flag potentially fraudulent financial
-                    transactions using monetary data patterns. Deployed web
-                    interface to simulate testing and prediction workflows.
-                  </p>
-                  <p class="text-sm text-gray-500 font-nunito mb-4">
-                    <strong>Built with:</strong> Python, Scikit-learn, Flask,
-                    Pandas
-                  </p>
-                  <div class="flex space-x-4">
-                    <a
-                      href="https://github.com/Musoye/FraudDetect"
-                      class="text-accent hover:underline font-medium"
-                      >GitHub Repo</a
-                    >
-                    <a
-                      href="https://github.com/Musoye/FraudDetect"
-                      class="text-accent hover:underline font-medium inline-flex items-center"
-                    >
-                      View Project <i class="fas fa-arrow-right ml-1"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Facial Emotion Recognition -->
-            <div
-              class="bg-white rounded-xl shadow-lg overflow-hidden card-hover"
-            >
-              <div class="md:flex">
-                <div class="md:w-1/3">
-                  <div
-                    class="h-48 md:h-full bg-gradient-to-br from-green-500 to-blue-500 flex items-center justify-center"
-                  >
-                    <i class="fas fa-smile text-white text-6xl"></i>
-                  </div>
-                </div>
-                <div class="md:w-2/3 p-8">
-                  <h3 class="text-2xl font-outfit font-bold text-gray-900 mb-4">
-                    Facial Emotion Recognition
-                  </h3>
-                  <p class="text-gray-600 font-nunito mb-4">
-                    Built model that detects human emotions from facial images.
-                    Includes web app where users can upload photos and get
-                    predictions like happy, sad, angry, or surprised.
-                  </p>
-                  <p class="text-sm text-gray-500 font-nunito mb-4">
-                    <strong>Built with:</strong> Python, OpenCV, TensorFlow,
-                    Streamlit
-                  </p>
-                  <div class="flex space-x-4">
-                    <a
-                      href="https://github.com/Musoye/ai/tree/main/facial_emotion"
-                      class="text-accent hover:underline font-medium"
-                      >GitHub Repo</a
-                    >
-                    <a
-                      href="https://github.com/Musoye/ai/tree/main/facial_emotion"
-                      class="text-accent hover:underline font-medium inline-flex items-center"
-                    >
-                      View Project <i class="fas fa-arrow-right ml-1"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-primary text-white py-12">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-8">
-          <h3 class="text-2xl font-outfit font-bold mb-2">
-            Let's get started on something great
-          </h3>
-          <h4 class="text-lg font-outfit mb-4">Contact</h4>
-          <div class="space-y-2 font-nunito">
-            <p>
-              <a
-                href="mailto:oyebamijimustapha44@gmail.com"
-                class="hover:text-accent transition-colors"
-              >
-                Email: oyebamijimustapha44@gmail.com
-              </a>
-            </p>
-            <p>
-              <a
-                href="tel:+2349076109309"
-                class="hover:text-accent transition-colors"
-              >
-                Phone: +234-09076109309
-              </a>
-            </p>
-          </div>
-        </div>
-
-        <div class="flex justify-center space-x-6 mb-8">
-          <a
-            href="https://twitter.com/musoye1"
-            target="_blank"
-            class="text-2xl hover:text-accent transition-colors"
-          >
-            <i class="fab fa-twitter"></i>
-          </a>
-          <a
-            href="https://linkedin.com/in/musoye"
-            target="_blank"
-            class="text-2xl hover:text-accent transition-colors"
-          >
-            <i class="fab fa-linkedin"></i>
-          </a>
-          <a
-            href="https://github.com/musoye"
-            target="_blank"
-            class="text-2xl hover:text-accent transition-colors"
-          >
-            <i class="fab fa-github"></i>
-          </a>
-          <a
-            href="https://medium.com/@musoye1"
-            target="_blank"
-            class="text-2xl hover:text-accent transition-colors"
-          >
-            <i class="fab fa-medium"></i>
-          </a>
-          <a
-            href="https://musoye.hashnode.dev"
-            target="_blank"
-            class="text-2xl hover:text-accent transition-colors"
-          >
-            <i class="fas fa-blog"></i>
-          </a>
-        </div>
-
-        <hr class="border-gray-600 mb-6" />
-
-        <div
-          class="flex flex-col md:flex-row justify-between items-center text-sm font-nunito"
-        >
-          <p>&copy; Copyright 2024-2025, All Rights Reserved</p>
-          <p class="mt-2 md:mt-0">
-            Skill Development Lead @
-            <span class="text-accent font-semibold"
-              >Google Developer Group on Campus, FUTA</span
-            >
-          </p>
-        </div>
-      </div>
-    </footer>
-
-    <!-- Contact Modal -->
-    <div
-      id="contact-modal"
-      class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50 opacity-0 pointer-events-none transition-opacity duration-300"
-    >
-      <div
-        class="bg-white rounded-xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto"
-      >
-        <div class="p-6">
-          <div class="flex justify-between items-center mb-6">
-            <h3 class="text-2xl font-outfit font-bold text-gray-900">
-              Get in touch
-            </h3>
-            <button
-              id="close-modal"
-              class="text-gray-400 hover:text-gray-600 text-2xl"
-            >
-              <i class="fas fa-times"></i>
-            </button>
-          </div>
-
-          <form id="contact-form" class="space-y-4">
-            <div>
-              <label
-                for="name"
-                class="block text-sm font-nunito font-medium text-gray-700 mb-1"
-                >Name</label
-              >
-              <input
-                type="text"
-                id="name"
-                name="name"
-                required
-                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
-              />
-            </div>
-
-            <div>
-              <label
-                for="email"
-                class="block text-sm font-nunito font-medium text-gray-700 mb-1"
-                >Email</label
-              >
-              <input
-                type="email"
-                id="email"
-                name="email"
-                required
-                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
-              />
-            </div>
-
-            <div>
-              <label
-                for="message"
-                class="block text-sm font-nunito font-medium text-gray-700 mb-1"
-                >Message</label
-              >
-              <textarea
-                id="message"
-                name="message"
-                rows="5"
-                required
-                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
-              ></textarea>
-            </div>
-
-            <button
-              type="submit"
-              class="w-full bg-accent hover:bg-orange-600 text-white py-3 rounded-lg font-outfit font-medium transition-colors"
-            >
-              Send Message <i class="fas fa-envelope ml-2"></i>
-            </button>
-          </form>
+        <div class="sidebar-block">
+          <p class="sidebar-label">Phone</p>
+          <p><a href="tel:+2349076109309" style="color:var(--rust)">+234-09076109309</a></p>
         </div>
       </div>
     </div>
 
-    <script>
-      // Mobile menu toggle
-      const mobileMenuBtn = document.getElementById("mobile-menu-btn");
-      const mobileMenu = document.getElementById("mobile-menu");
+    <hr class="divider" />
 
-      mobileMenuBtn.addEventListener("click", () => {
-        mobileMenu.classList.toggle("section-hidden");
+    <!-- Skills -->
+    <div class="reveal">
+      <h3 class="section-h">What I work with</h3>
+      <p class="section-sub">Languages, frameworks, databases, and tools I reach for regularly.</p>
+      <div class="skill-group">
+        <p class="skill-group-label">Languages</p>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span><span class="skill-tag">JavaScript</span><span class="skill-tag">TypeScript</span><span class="skill-tag">Go</span><span class="skill-tag">PHP</span><span class="skill-tag">C / C++</span><span class="skill-tag">SQL</span><span class="skill-tag">Bash</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <p class="skill-group-label">Frameworks</p>
+        <div class="skill-tags">
+          <span class="skill-tag">Django</span><span class="skill-tag">Flask</span><span class="skill-tag">Express.js</span><span class="skill-tag">Laravel</span><span class="skill-tag">Vue.js</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <p class="skill-group-label">Databases &amp; Cloud</p>
+        <div class="skill-tags">
+          <span class="skill-tag">PostgreSQL</span><span class="skill-tag">MySQL</span><span class="skill-tag">MongoDB</span><span class="skill-tag">DynamoDB</span><span class="skill-tag">OpenSearch</span><span class="skill-tag">Redis</span><span class="skill-tag">AWS (S3, SQS)</span><span class="skill-tag">Google Cloud</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <p class="skill-group-label">ML / AI</p>
+        <div class="skill-tags">
+          <span class="skill-tag">PyTorch</span><span class="skill-tag">TensorFlow</span><span class="skill-tag">scikit-learn</span><span class="skill-tag">OpenCV</span><span class="skill-tag">Pandas / NumPy</span><span class="skill-tag">Transformers</span><span class="skill-tag">Federated Learning</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <p class="skill-group-label">DevOps &amp; Tools</p>
+        <div class="skill-tags">
+          <span class="skill-tag">Docker</span><span class="skill-tag">Linux</span><span class="skill-tag">Nginx</span><span class="skill-tag">HAProxy</span><span class="skill-tag">Git</span><span class="skill-tag">REST APIs</span><span class="skill-tag">GraphQL</span><span class="skill-tag">Microservices</span>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- Experience -->
+    <div class="reveal">
+      <h3 class="section-h">Experience</h3>
+      <p class="section-sub">Where I've worked and what I built there.</p>
+
+      <div class="exp-item reveal d1">
+        <div class="exp-date">Sep 2025<br>— Present</div>
+        <div>
+          <p class="exp-company">SchoolTry <span style="font-weight:400;color:var(--muted);font-size:0.82rem">· Switzerland</span></p>
+          <p class="exp-role">FullStack Engineer</p>
+          <ul class="exp-bullets">
+            <li>Architected platform-wide audit logging using Laravel — capturing sensitive admin actions across 60+ schools in 10 countries.</li>
+            <li>Led migration from legacy permission system to team-scoped RBAC with zero downtime across 60+ institutions.</li>
+            <li>Built full-stack features in Laravel + Vue.js covering result management, payment reconciliation, and institutional admin.</li>
+            <li>Improved data integrity by implementing granular access controls, reducing risk of unauthorized record manipulation.</li>
+          </ul>
+          <div class="proj-links"><a class="proj-link" href="https://schooltry.com" target="_blank">schooltry.com ↗</a></div>
+          <div class="exp-stack"><span class="stack-tag">Laravel</span><span class="stack-tag">Vue.js</span><span class="stack-tag">PostgreSQL</span><span class="stack-tag">RBAC</span></div>
+        </div>
+      </div>
+
+      <div class="exp-item reveal d2">
+        <div class="exp-date">Jan 2025<br>— Present</div>
+        <div>
+          <p class="exp-company">Nexora <span style="font-weight:400;color:var(--muted);font-size:0.82rem">· Contract</span></p>
+          <p class="exp-role">Backend Engineering Lead</p>
+          <ul class="exp-bullets">
+            <li>Led backend architecture for multiple client platforms using Node.js, designing services for high-concurrency workloads.</li>
+            <li>Engineered secure payment pipelines via Paystack API and a blockchain asset verification platform using Moralis.</li>
+            <li>Managed versioned REST API deployments on AWS ensuring clean microservice synchronization.</li>
+          </ul>
+          <div class="proj-links"><a class="proj-link" href="https://www.nexora-x.dev/" target="_blank">www.nexora-x.dev ↗</a></div>
+          <div class="exp-stack"><span class="stack-tag">Node.js</span><span class="stack-tag">Express.js</span><span class="stack-tag">Paystack</span><span class="stack-tag">AWS</span></div>
+        </div>
+      </div>
+
+      <div class="exp-item reveal d3">
+        <div class="exp-date">Jan 2025<br>— Apr 2025</div>
+        <div>
+          <p class="exp-company">Peeriva</p>
+          <p class="exp-role">Backend Engineer</p>
+          <ul class="exp-bullets">
+            <li>Built a real-time Notification Service with Redis + Amazon SQS — 10K+ messages/day at 99.9% delivery reliability.</li>
+            <li>Developed a User Activity Service with DynamoDB, cutting latency 55% across 100K+ activity logs.</li>
+            <li>Orchestrated a distributed Search Service integrating OpenSearch, PostgreSQL, and DynamoDB — 3× faster queries.</li>
+          </ul>
+          <div class="proj-links"><a class="proj-link" href="https://dev.peeriva.com" target="_blank">dev.peeriva.com ↗</a></div>
+          <div class="exp-stack"><span class="stack-tag">Django</span><span class="stack-tag">Redis</span><span class="stack-tag">Amazon SQS</span><span class="stack-tag">OpenSearch</span></div>
+        </div>
+      </div>
+
+      <!-- <div class="exp-item reveal d4">
+        <div class="exp-date">Jul 2024<br>— Dec 2024</div>
+        <div>
+          <p class="exp-company">NGreen Logistics <span style="font-weight:400;color:var(--muted);font-size:0.82rem">· Freelance</span></p>
+          <p class="exp-role">Backend Engineer / Lead</p>
+          <ul class="exp-bullets">
+            <li>MERN-stack logistics backend scaling to 1,200+ monthly deliveries with real-time dispatching.</li>
+            <li>Achieved 99.99% API uptime with JWT auth, structured error handling, and centralized logging.</li>
+            <li>Reduced delivery turnaround by 25%, improved tracking transparency across 1,000+ monthly orders.</li>
+          </ul>
+          <div class="exp-stack"><span class="stack-tag">MongoDB</span><span class="stack-tag">Express.js</span><span class="stack-tag">Node.js</span><span class="stack-tag">JWT</span></div>
+        </div>
+      </div> -->
+    </div>
+
+    <hr class="divider" />
+
+    <!-- Writing -->
+    <div class="reveal">
+      <h3 class="section-h">Writing</h3>
+      <p class="section-sub">Technical articles I've published.</p>
+      <div>
+        <a class="blog-item" href="https://medium.com/@musoye1/brain-tumor-classifier-based-on-brain-mri-images-b537e4d82d8d" target="_blank">
+          <span class="blog-tag">Machine Learning</span>
+          <span class="blog-title">Brain Tumor Detection using MRI Scanned Images</span>
+          <span class="blog-arrow"><i class="fas fa-arrow-right"></i></span>
+        </a>
+        <a class="blog-item" href="https://musoye.hashnode.dev/processes-on-linux" target="_blank">
+          <span class="blog-tag">Linux / SysAdmin</span>
+          <span class="blog-title">Processes on Linux — from creation to termination</span>
+          <span class="blog-arrow"><i class="fas fa-arrow-right"></i></span>
+        </a>
+        <a class="blog-item" href="https://medium.com/%40musoye1/what-happens-when-you-type-https-www-google-com-in-your-browser-and-press-enter-6b843a762dfa" target="_blank">
+          <span class="blog-tag">Web</span>
+          <span class="blog-title">What happens when you type google.com and press Enter</span>
+          <span class="blog-arrow"><i class="fas fa-arrow-right"></i></span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════ PAGE: HONORS ══════ -->
+<div id="page-honors" class="page" style="background:var(--paper)">
+  <div class="content-wrap">
+
+    <div class="reveal">
+      <h2 class="about-heading" style="margin-bottom:0.5rem">Honors &amp;<br>Achievements.</h2>
+      <p class="section-sub" style="margin-bottom:3rem">A record of things that went well.</p>
+    </div>
+
+    <div class="honors-grid reveal">
+      <div class="honor-cell">
+        <div class="honor-place">25</div>
+        <p class="honor-title">Intelligent Planet Hackathon</p>
+        <p class="honor-where">KFUPM · Saudi Arabia · Top 25 of 2000+ global teams</p>
+        <p class="honor-desc">Built EcoFlow AI — an event-driven digital twin on Google Cloud processing real-time IoT data to predict crowd surges and optimise carbon emissions. Selected from over 2,000 global applications.</p>
+      </div>
+      <div class="honor-cell">
+        <div class="honor-place">2nd</div>
+        <p class="honor-title">Wema Bank Hackathon</p>
+        <p class="honor-where">Fintech · Security Track</p>
+        <p class="honor-desc">Built TrustLock — a secure gateway for remote companies to monitor and authenticate employees, with digital auth, user priority levels, and IP/location/device tracking.</p>
+      </div>
+      <div class="honor-cell">
+        <div class="honor-place">8th</div>
+        <p class="honor-title">Squadco Hackathon</p>
+        <p class="honor-where">EdTech / Fintech · 8th of 108 teams</p>
+        <p class="honor-desc">Developed SSFH — a platform for automating school fee savings for students, including backend services to handle transactions efficiently at scale.</p>
+      </div>
+      <!-- <div class="honor-cell">
+        <div class="honor-place" style="font-size:2rem;padding-top:0.4rem">329</div>
+        <p class="honor-title">UTME 2021</p>
+        <p class="honor-where">Nationwide · Top 1% in Nigeria</p>
+        <p class="honor-desc">Scored 329 in the Unified Tertiary Matriculation Examination, placing in the top 1% of candidates nationally.</p>
+      </div> -->
+
+      
+     <div class="honor-cell honor-image">
+    <img src="./images/c.jpg" alt="Hackathon moment">
+  </div>
+
+
+  <div class="honor-cell honor-image">
+    <img src="images/b.jpg" alt="Award moment">
+  </div>
+
+  <div class="honor-cell honor-image">
+    <img src="images/a.jpg" alt="Hackathon moment">
+    </div>  
+
+  
+    </div>
+
+    <hr class="divider" />
+
+    <div class="reveal">
+      <h3 class="section-h">Research</h3>
+      <p class="section-sub">Academic work currently in review.</p>
+      <div class="pub-block">
+        <p class="pub-status">In Review · 2025</p>
+        <p class="pub-title">Lightweight and Privacy-Preserving Federated Deep-Learning Framework for Efficient Brain Tumor Detection Across Distributed Medical Centers</p>
+        <p class="pub-authors">Mustapha O., Charles O.</p>
+        <p class="pub-body">A federated learning framework for collaborative MRI analysis without sharing patient data. Achieved <strong>84% accuracy</strong> with a custom CNN and <strong>98.5%</strong> with EfficientNetB0, optimised via pruning and quantisation so it runs on standard clinical hardware — not just research clusters.</p>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <div class="reveal">
+      <h3 class="section-h">Leadership &amp; Teaching</h3>
+      <p class="section-sub">Roles beyond writing code.</p>
+      <div class="lead-item">
+        <p class="lead-title">Bootcamp &amp; Skills Development Lead</p>
+        <p class="lead-org">Google Developer Student Club (GDSC), FUTA — 2023/24 &amp; 2024/25</p>
+        <p class="lead-desc">Organised and led coding bootcamps introducing students to backend development, cloud technologies, and real-world project experience. Mentored participants through hands-on technical work.</p>
+      </div>
+      <div class="lead-item">
+        <p class="lead-title">Tutor — Engineering Thermodynamics (MEE 206)</p>
+        <p class="lead-org">Muslim Student Society of Nigeria, FUTA</p>
+        <p class="lead-desc">Tutored up to 30 students, helping them improve understanding and exam performance.</p>
+      </div>
+      <div class="lead-item">
+        <p class="lead-title">Peer Tutor — Discrete Maths &amp; Algorithms / C Programming</p>
+        <p class="lead-org">CPE 201 &amp; CPE 202, FUTA</p>
+        <p class="lead-desc">Mentored departmental peers in core computer science subjects. High pass rates among mentees.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════ PAGE: PROJECTS ══════ -->
+<div id="page-projects" class="page" style="background:var(--paper)">
+  <div class="content-wrap">
+
+    <div class="reveal">
+      <h2 class="about-heading" style="margin-bottom:0.5rem">Projects &amp;<br>Work.</h2>
+      <p class="section-sub" style="margin-bottom:2rem">Things I've built, shipped, or researched.</p>
+    </div>
+
+    <div class="proj-filter reveal">
+      <button class="filter-btn on" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="backend">Backend</button>
+      <button class="filter-btn" data-filter="fullstack">Fullstack</button>
+      <button class="filter-btn" data-filter="ml">ML / AI</button>
+    </div>
+
+    <div class="proj-grid reveal">
+
+      <!-- <div class="proj-card" data-cat="fullstack">
+        <p class="proj-badge">Live · Switzerland</p>
+        <p class="proj-cat">Fullstack · EdTech</p>
+        <p class="proj-name">SchoolTry Platform</p>
+        <p class="proj-desc">60+ schools across 10 countries. Audit logging, team-scoped RBAC migration, and academic/financial workflows. Zero-downtime migration of legacy permission systems.</p>
+        <p class="proj-stack">Laravel · Vue.js · PostgreSQL · RBAC</p>
+        <div class="proj-links"><a class="proj-link" href="https://schooltry.com" target="_blank">schooltry.com ↗</a></div>
+      </div> -->
+
+      <div class="proj-card" data-cat="backend">
+        <p class="proj-cat">Backend · FinTech · Voice</p>
+        <p class="proj-name">Padipay</p>
+        <p class="proj-desc">Voice-controlled payment system supporting English and Nigerian English. Multilingual voice recognition, real-time transaction processing, and secure backend validation.</p>
+        <p class="proj-stack">Python · Django · MongoDB · SpeechRecognition · PostgreSQL</p>
+        <div class="proj-links"><a class="proj-link" href="https://padipay.musoye.tech" target="_blank">padipay.musoye.tech ↗</a></div>
+      </div>
+
+      <div class="proj-card" data-cat="fullstack">
+        <p class="proj-badge">2nd · Wema Bank Hackathon</p>
+        <p class="proj-cat">Fullstack · Security</p>
+        <p class="proj-name">TrustLock</p>
+        <p class="proj-desc">Secure workforce access gateway — RBAC, JWT auth, and full audit trails tracking IP, device identity, and geolocation. Built for distributed remote teams.</p>
+        <p class="proj-stack">Django · PostgreSQL · Redis · JWT · Vue.js</p>
+        <div class="proj-links"><a class="proj-link" href="https://trustlock.musoye.tech" target="_blank">trustlock.musoye.tech ↗</a></div>
+      </div>
+
+      <div class="proj-card" data-cat="ml">
+        <p class="proj-badge">Top 25 / 2000+ · Saudi Arabia</p>
+        <p class="proj-cat">ML · IoT · Cloud</p>
+        <p class="proj-name">EcoFlow AI</p>
+        <p class="proj-desc">Event-driven digital twin on Google Cloud processing real-time IoT data to predict crowd surges and optimise carbon emissions. Firestore for real-time, BigQuery for analytics.</p>
+        <p class="proj-stack">Flask · MySQL · Google Cloud · Firestore · BigQuery · Nginx</p>
+                <div class="proj-links">
+          <a class="proj-link" href="https://github.com/Musoye/ecoflow-backend" target="_blank">GitHub ↗</a></div>
+      </div>
+
+      <!-- <div class="proj-card" data-cat="backend">
+        <p class="proj-cat">Backend · Microservices</p>
+        <p class="proj-name">Notification Microservice</p>
+        <p class="proj-desc">Fault-tolerant pub/sub system — 10K+ messages/day, 99.9% delivery success via queue prioritisation, backpressure control, and rate limiting.</p>
+        <p class="proj-stack">Django · Redis · Amazon SQS · DynamoDB · PostgreSQL</p>
+      </div> -->
+
+      <div class="proj-card" data-cat="ml">
+        <p class="proj-badge">Publication Pending</p>
+        <p class="proj-cat">ML · Medical AI · Research</p>
+        <p class="proj-name">Brain Tumor Detection</p>
+        <p class="proj-desc">Custom CNN + fine-tuned ResNet for MRI tumour classification. Extended into a federated learning framework achieving 98.5% accuracy across distributed hospitals without sharing patient data.</p>
+        <p class="proj-stack">PyTorch · TensorFlow · OpenCV · Flask · Federated Learning</p>
+        <div class="proj-links">
+          <a class="proj-link" href="https://github.com/Musoye/BrainTumorDetection" target="_blank">GitHub ↗</a>
+          <a class="proj-link" href="https://medium.com/@musoye1/brain-tumor-classifier-based-on-brain-mri-images-b537e4d82d8d" target="_blank">Article ↗</a>
+        </div>
+      </div>
+
+      <div class="proj-card" data-cat="ml">
+        <p class="proj-cat">ML · AgriTech · Mobile</p>
+        <p class="proj-name">CropWatch</p>
+        <p class="proj-desc">AI crop disease detection via transfer learning on CNNs. Two-stage training — feature freezing then fine-tuning. Mobile backend for real-time field inference from leaf images.</p>
+        <p class="proj-stack">Flask · MySQL · Nginx · CNN Transfer Learning</p>
+         <div class="proj-links">
+          <a class="proj-link" href="https://github.com/Musoye/crop-detection-ai-backend" target="_blank">GitHub ↗</a></div>
+      </div>
+
+      <div class="proj-card" data-cat="ml">
+        <p class="proj-cat">ML · NLP · LLM</p>
+        <p class="proj-name">Fine-tuning GPT-2 for Sentiment</p>
+        <p class="proj-desc">Rebuilt GPT-2 in PyTorch and fine-tuned on a custom dataset for high-accuracy sentiment classification. Tokeniser setup, model optimisation, and reduced inference latency.</p>
+        <p class="proj-stack">Python · PyTorch · Transformers · HuggingFace</p>
+        <div class="proj-links"><a class="proj-link" href="https://github.com/Musoye/LLM" target="_blank">GitHub ↗</a></div>
+      </div>
+
+      <div class="proj-card" data-cat="backend">
+        <p class="proj-cat">Backend · AI · ALX Final Project</p>
+        <p class="proj-name">HelpBot</p>
+        <p class="proj-desc">AI document assistant that parses PDFs and answers contextual queries via OpenAI. Response time reduced by 65% through prompt tuning and payload optimisation.</p>
+        <p class="proj-stack">Node.js · Express.js · OpenAI API · Vue/Vite</p>
+        <div class="proj-links"><a class="proj-link" href="https://github.com/Musoye/helpbot" target="_blank">GitHub ↗</a></div>
+      </div>
+
+      <!-- <div class="proj-card" data-cat="backend">
+        <p class="proj-cat">Backend · Logistics · MERN</p>
+        <p class="proj-name">NGreen Logistics Backend</p>
+        <p class="proj-desc">1,200+ monthly deliveries, real-time dispatching, 99.99% API uptime. Sub-second responses on 100K+ records. Reduced onboarding time by 30%.</p>
+        <p class="proj-stack">MongoDB · Express.js · Node.js · JWT</p>
+      </div> -->
+
+      <div class="proj-card" data-cat="ml">
+        <p class="proj-cat">ML · FinTech</p>
+        <p class="proj-name">Fraud Detection System</p>
+        <p class="proj-desc">ML model flagging fraudulent transactions using monetary data patterns, with a Flask web interface for simulation and real-time prediction workflows.</p>
+        <p class="proj-stack">Python · scikit-learn · Flask · Pandas</p>
+        <div class="proj-links"><a class="proj-link" href="https://github.com/Musoye/FraudDetect" target="_blank">GitHub ↗</a></div>
+      </div>
+
+      <div class="proj-card" data-cat="ml">
+        <p class="proj-cat">ML · Computer Vision</p>
+        <p class="proj-name">Facial Emotion Recognition</p>
+        <p class="proj-desc">Detects human emotions from facial images — happy, sad, angry, surprised. Web app for uploading photos and getting real-time predictions.</p>
+        <p class="proj-stack">Python · OpenCV · TensorFlow · Streamlit</p>
+        <div class="proj-links"><a class="proj-link" href="https://github.com/Musoye/ai/tree/main/facial_emotion" target="_blank">GitHub ↗</a></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p class="foot-name">Musoye.</p>
+  <p class="foot-tagline">Software engineer, ML explorer, perpetual learner.</p>
+  <div class="foot-links">
+    <a href="https://github.com/musoye" target="_blank"><i class="fab fa-github"></i></a>
+    <a href="https://linkedin.com/in/musoye" target="_blank"><i class="fab fa-linkedin"></i></a>
+    <a href="https://twitter.com/musoye1" target="_blank"><i class="fab fa-twitter"></i></a>
+    <a href="https://medium.com/@musoye1" target="_blank"><i class="fab fa-medium"></i></a>
+    <a href="https://musoye.hashnode.dev" target="_blank"><i class="fas fa-blog"></i></a>
+    <a href="mailto:oyebamijimustapha44@gmail.com"><i class="fas fa-envelope"></i></a>
+  </div>
+  <p class="foot-copy">&copy; 2025 Oyebamiji Mustapha Oyetunde · All rights reserved</p>
+</footer>
+
+<!-- CONTACT MODAL -->
+<div id="contact-modal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3 class="modal-title">Say hello.</h3>
+      <button class="modal-close" id="close-modal"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <form id="contact-form">
+        <div class="field">
+          <label>Name</label>
+          <input type="text" id="name" name="name" required placeholder="Your name" />
+        </div>
+        <div class="field">
+          <label>Email</label>
+          <input type="email" id="email" name="email" required placeholder="your@email.com" />
+        </div>
+        <div class="field">
+          <label>Message</label>
+          <textarea id="message" name="message" required placeholder="What's on your mind?"></textarea>
+        </div>
+        <button type="submit" class="btn-rust" style="width:100%;justify-content:center">
+          Send message <i class="fas fa-paper-plane"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  // SECTION SWITCHING
+  const pages = { about: 'page-about', honors: 'page-honors', projects: 'page-projects' };
+  let current = 'about';
+
+  function switchSection(sec) {
+    document.getElementById(pages[current]).classList.remove('visible');
+    current = sec;
+    document.getElementById(pages[sec]).classList.add('visible');
+    document.querySelectorAll('[data-sec]').forEach(el => el.classList.toggle('active', el.dataset.sec === sec));
+    window.scrollTo({ top: document.getElementById('section-bar').offsetTop - 60, behavior: 'smooth' });
+    setTimeout(runReveal, 80);
+  }
+
+  document.querySelectorAll('[data-sec]').forEach(btn => {
+    btn.addEventListener('click', () => switchSection(btn.dataset.sec));
+  });
+
+  // PROJECT FILTER
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('on'));
+      this.classList.add('on');
+      const f = this.dataset.filter;
+      document.querySelectorAll('.proj-card').forEach(card => {
+        card.style.display = (f === 'all' || card.dataset.cat === f) ? 'flex' : 'none';
       });
+    });
+  });
 
-      // Section toggle functionality
-      const aboutBtn = document.getElementById("about-btn");
-      const projectsBtn = document.getElementById("projects-btn");
-      const aboutSection = document.getElementById("about-section");
-      const projectsSection = document.getElementById("projects-section");
+  // MOBILE MENU
+  document.getElementById('mob-nav-btn').addEventListener('click', () => document.getElementById('mob-menu').classList.add('open'));
+  document.getElementById('mob-menu-close').addEventListener('click', closeMob);
+  function closeMob() { document.getElementById('mob-menu').classList.remove('open'); }
 
-      function showAbout(event, isInitialLoad = false) {
-        if (event) event.preventDefault(); // Prevent default link behavior
-        aboutSection.classList.remove("section-hidden");
-        projectsSection.classList.add("section-hidden");
-        aboutBtn.classList.add("bg-primary", "text-white");
-        aboutBtn.classList.remove("text-primary");
-        projectsBtn.classList.remove("bg-primary", "text-white");
-        projectsBtn.classList.add("text-primary");
-        if (!isInitialLoad) {
-          aboutSection.scrollIntoView({ behavior: "smooth" });
-        }
-      }
+  // CONTACT MODAL
+  const modal = document.getElementById('contact-modal');
+  document.getElementById('contact-btn').addEventListener('click', () => modal.classList.add('open'));
+  document.getElementById('close-modal').addEventListener('click', () => modal.classList.remove('open'));
+  modal.addEventListener('click', e => { if (e.target === modal) modal.classList.remove('open'); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') modal.classList.remove('open'); });
 
-      function showProjects(event) {
-        if (event) event.preventDefault();
-        projectsSection.classList.remove("section-hidden");
-        aboutSection.classList.add("section-hidden");
-        projectsBtn.classList.add("bg-primary", "text-white");
-        projectsBtn.classList.remove("text-primary");
-        aboutBtn.classList.remove("bg-primary", "text-white");
-        aboutBtn.classList.add("text-primary");
-        projectsSection.scrollIntoView({ behavior: "smooth" });
-      }
+  // EMAILJS
+  document.getElementById('contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const btn = this.querySelector('button[type=submit]');
+    const orig = btn.innerHTML;
+    btn.innerHTML = 'Sending… <i class="fas fa-spinner fa-spin"></i>';
+    btn.disabled = true;
+    emailjs.send('service_t16lflp', 'template_l6147p9', {
+      from_name: document.getElementById('name').value,
+      from_email: document.getElementById('email').value,
+      message: document.getElementById('message').value,
+      to_name: 'Musoye'
+    }).then(() => {
+      alert('Message sent!');
+      this.reset();
+      modal.classList.remove('open');
+    }).catch((error) => {
+      console.log('EmailJS error:', error);
+      alert('Could not send. Please email directly: oyebamijimustapha44@gmail.com');
+    }).finally(() => {
+      btn.innerHTML = orig;
+      btn.disabled = false;
+    });
+  });
 
-      // Event listeners for toggle buttons
-      aboutBtn.addEventListener("click", showAbout);
-      projectsBtn.addEventListener("click", showProjects);
+  // SCROLL REVEAL
+  function runReveal() {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+    }, { threshold: 0.07 });
+    document.querySelectorAll('.reveal:not(.in)').forEach(el => observer.observe(el));
+  }
 
-      const contactBtn = document.getElementById("contact-btn");
-      const contactModal = document.getElementById("contact-modal");
-      const closeModal = document.getElementById("close-modal");
-      const contactForm = document.getElementById("contact-form");
-
-      // Show modal
-      contactBtn.addEventListener("click", () => {
-        contactModal.classList.remove("opacity-0", "pointer-events-none");
-        document.body.style.overflow = "hidden"; // Prevent background scroll
-      });
-
-      // Hide modal
-      function hideContactModal() {
-        contactModal.classList.add("opacity-0", "pointer-events-none");
-        document.body.style.overflow = "auto"; // Restore scroll
-      }
-
-      closeModal.addEventListener("click", hideContactModal);
-
-      // Click outside to close
-      contactModal.addEventListener("click", (e) => {
-        if (e.target === contactModal) {
-          hideContactModal();
-        }
-      });
-
-      const navLinks = document.querySelectorAll(".nav-link");
-      navLinks.forEach((link) => {
-        link.addEventListener("click", function (e) {
-          e.preventDefault();
-          const targetId = this.getAttribute("href");
-          const targetSection = document.querySelector(targetId);
-
-          if (targetSection) {
-            // Handle section switching
-            if (targetId === "#about") {
-              showAbout(event);
-            } else if (targetId === "#projects") {
-              showProjects(event);
-            }
-
-            // Smooth scroll to target
-            targetSection.scrollIntoView({
-              behavior: "smooth",
-              block: "start",
-            });
-
-            // Close mobile menu if open
-            mobileMenu.classList.add("section-hidden");
-          }
-        });
-      });
-
-      // Close mobile menu when clicking on links
-      const mobileNavLinks = document.querySelectorAll(
-        "#mobile-menu .nav-link"
-      );
-      mobileNavLinks.forEach((link) => {
-        link.addEventListener("click", () => {
-          mobileMenu.classList.add("section-hidden");
-        });
-      });
-
-      // Escape key to close modal
-      document.addEventListener("keydown", function (e) {
-        if (
-          e.key === "Escape" &&
-          !contactModal.classList.contains("section-hidden")
-        ) {
-          contactModal.classList.add("section-hidden");
-          document.body.style.overflow = "auto";
-        }
-      });
-
-      // Initialize page - show about section by default
-      document.addEventListener("DOMContentLoaded", function () {
-        showAbout(event, true);
-      });
-    </script>
-  </body>
+  document.addEventListener('DOMContentLoaded', () => setTimeout(runReveal, 200));
+</script>
+</body>
 </html>
